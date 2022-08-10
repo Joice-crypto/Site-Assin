@@ -2,7 +2,7 @@
 
 try
 {
-    $pdo = new PDO("mysql:host=localhost;dbname=ASSIN_DB;", "phpmyadmin", "$3nh@doMySQL");
+    $pdo = new PDO("mysql:host=localhost;dbname=;", "", "");
 }
 catch(PDOException $e)
 {
