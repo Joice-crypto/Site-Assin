@@ -47,7 +47,8 @@ body {
 }
 
 .card {
-  height: 60vh;
+  height: 50vh;
+  
 }
 
 .card-title{
@@ -203,3 +204,36 @@ input[type="text"]:focus {
 .SearchItem:hover {
   background-color: #c0c0c0;
 }
+
+.teste{
+ position: absolute;
+  display: block;
+  justify-content: center;
+bottom: -3px;
+margin-left: 800px;
+}
+
+.d-block2 {
+  position: relative;
+  margin-top:10px;
+  width: 100px;
+  height: 90px;
+  border-radius:47%;
+  margin-left: 40%;
+
+}
+.carousel-inner1 p {
+  
+  color: #000;
+  margin-top: 10px;
+  text-align:justify ;
+  
+}
+.carousel-inner1 h5{
+  text-align: center;
+  color: #000;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+
