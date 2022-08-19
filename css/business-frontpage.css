@@ -207,10 +207,10 @@ input[type="text"]:focus {
 
 .teste{
  position: absolute;
-  display: block;
+  
   justify-content: center;
 bottom: -3px;
-margin-left: 800px;
+margin-left: 760px;
 }
 
 .d-block2 {
@@ -222,14 +222,14 @@ margin-left: 800px;
   margin-left: 40%;
 
 }
-.carousel-inner1 p {
+.carousel-inner p {
   
   color: #000;
   margin-top: 10px;
   text-align:justify ;
   
 }
-.carousel-inner1 h5{
+.carousel-inner h5{
   text-align: center;
   color: #000;
   margin-top: 10px;

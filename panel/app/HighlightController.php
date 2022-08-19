@@ -333,7 +333,6 @@
       return false;
     }
 
-    // ERRO NESTA FUNÇÃO
 
     public function createHighlight($HighlightModel) {
       global $pdo;
