@@ -155,12 +155,12 @@
                   <li class="nav-item">
                     <a class="nav-link" id="en-US-tab" data-toggle="tab" href="#title_english" role="tab" aria-controls="english" aria-selected="false">Inglês</a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a class="nav-link" id="es-ES-tab" data-toggle="tab" href="#title_spanish" role="tab" aria-controls="spanish" aria-selected="false">Espanhol</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="fr-FR-tab" data-toggle="tab" href="#title_french" role="tab" aria-controls="french" aria-selected="false">Francês</a>
-                  </li>
+                  </li> -->
                 </ul>
                 <div class="tab-content" id="TitleContent">
                   <div class="tab-pane fade mt-1 show active" id="title_portuguese" role="tabpanel" aria-labelledby="pt-BR-tab">
@@ -211,12 +211,12 @@
                   <li class="nav-item">
                     <a class="nav-link" id="en-US-tab-edit" data-toggle="tab" href="#edit_name_english" role="tab" aria-controls="english" aria-selected="false">Inglês</a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a class="nav-link" id="es-ES-tab-edit" data-toggle="tab" href="#edit_name_spanish" role="tab" aria-controls="spanish" aria-selected="false">Espanhol</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" id="fr-FR-tab-edit" data-toggle="tab" href="#edit_name_french" role="tab" aria-controls="french" aria-selected="false">Francês</a>
-                  </li>
+                  </li> -->
                 </ul>
                 <div class="tab-content" id="TitleContent">
                   <div class="tab-pane fade mt-1 show active" id="edit_name_portuguese" role="tabpanel" aria-labelledby="pt-BR-tab-edit">
@@ -267,7 +267,7 @@
         $("#MenuLevel").val(MenuLevel);
       }
 
-      function EditMenu (MenuID, MenuLevel, MenuRedirection, MenuNamePT, MenuNameEN) {
+      function EditMenu (MenuID, MenuLevel, MenuRedirection, MenuNamePT, MenuNameEN, MenuNameES, MenuNameFR) {
         $("#EditMenuID").val(MenuID);
         $("#EditMenuLevel").val(MenuLevel);
         $("#txtEditRedirection").val(MenuRedirection);

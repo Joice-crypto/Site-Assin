@@ -5,6 +5,7 @@ require_once('lang/common.php');
 require_once('panel/app/CarouselImageController.php');
 require_once('panel/app/HighlightController.php');
 require_once('panel/app/CardController.php');
+require_once('panel/app/DepoimentoController.php');
 require_once('panel/app/GeneralSettingController.php');
 
 $Detection = new Mobile_Detect;
@@ -153,7 +154,7 @@ $GeneralSettingModel = $GeneralSettingController->getGeneralSetting("institution
 
                 <a href="page.php?type=2&id=<?php echo $CardsArray[$i]->getCardID(); ?>" class="btn btn-primary"><?php echo $lang['READ_MORE']; ?></a>
               </div>
-              <?php require_once("./depoimnetos.php")   ?>
+              <?php require_once("./depoimentos.php")   ?>
 
             </div>
             

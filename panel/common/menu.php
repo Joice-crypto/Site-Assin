@@ -18,6 +18,12 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="Depoimentos.php">
+      <i class="fas fa-fw fa-id-card"></i>
+      <span>Depoimentos</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="editMenu.php">
       <i class="fas fa-fw fa-bars"></i>
       <span>Menu</span>

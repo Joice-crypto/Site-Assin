@@ -90,6 +90,7 @@
                     exit();
                 }
             } else {
+               
                 echo json_encode(array("status" => "failure", "message" => "Dados insconsistentes."));
                 exit();
             }
@@ -168,6 +169,7 @@
                     }
  
                     return true;
+                    
                 }
             } else if ($Level == 2 && !empty($SonOf)) { // menu que é filho do filho (o ultimo na cascata)
                 $MenuQuery = $pdo->prepare("INSERT INTO MenusGrandChilds (MenusGrandChilds_Redirection, MenusChilds_ID_FK) VALUES (?, ?);");
