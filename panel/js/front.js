@@ -415,6 +415,29 @@ function createPage() {
     });
   }
 }
+function createDepoimento() {
+  if ($("#createDepoimento").valid()) {
+    $.ajax({
+      type: 'POST',
+      url: 'app/DepoimentoController.php',
+      data: $("#createDepoimento").serialize() + "&actionPage=create"
+    }).done(function(data) {
+      console.log(data);
+      var dataReturned = JSON.parse(data);
+      if(dataReturned.status == 'success') {
+        $('#Alerts').prepend('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
+        setTimeout(function() {
+          window.location.href="pages.php";
+        }, 2000);
+      } else if(dataReturned.status == 'failure') {
+        $('#Alerts').prepend('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
+        setTimeout(function() {
+          $('#Alerts div').last().remove();
+        }, 5000);
+      }
+    });
+  }
+}
 
 function editPage(PageID) {
   if ($("#editPage").valid()) {

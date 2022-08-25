@@ -103,7 +103,7 @@
             </div>
             <div class="card-footer small text-muted"><?php echo count($DepoimentoArray); ?> resultado(s). Atualizado hoje <?php echo date('H:i'); ?></div>
           </div>
-          <button type="button" onclick="window.location.href='createDepo.php'" class="btn btn-primary w-100 mb-3">Criar Depoimento</button>
+          <button type="button" onclick="window.location.href='createDepoimento.php'" class="btn btn-primary w-100 mb-3">Criar Depoimento</button>
           <div id="Alerts"></div>
         </div>
 
