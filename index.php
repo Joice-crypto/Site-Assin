@@ -154,7 +154,7 @@ $GeneralSettingModel = $GeneralSettingController->getGeneralSetting("institution
 
                 <a href="page.php?type=2&id=<?php echo $CardsArray[$i]->getCardID(); ?>" class="btn btn-primary"><?php echo $lang['READ_MORE']; ?></a>
               </div>
-              <?php require_once("./depoimentos.php")   ?>
+              <?php require_once("./aaa.php")   ?>
 
             </div>
             

@@ -1,7 +1,4 @@
 <?php
-
-use JetBrains\PhpStorm\Internal\ReturnTypeContract;
-
     class DepoimentoModel {
         private $DepoID;
         private $DImage;
@@ -68,3 +65,4 @@ use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 
 
     }
+?>

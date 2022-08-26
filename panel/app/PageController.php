@@ -52,7 +52,8 @@
                 $PageModel->setPageTitle($TitleArray);
                 $PageModel->setPageContent($ContentArray);
 
-                if ($PageController->createPage($PageModel)) {
+                
+                if ($PageController->createDepoimento($PageModel)) {
                     echo json_encode(array("status" => "success", "message" => "Página criada com sucesso!"));
                     exit();
                 } else {
@@ -143,7 +144,7 @@
     }
 
     class PageController {
-        public function createPage($PageModel) {
+        public function createDepoimento($PageModel) {
             global $pdo;
 
             $PageQuery = $pdo->prepare("INSERT INTO Pages (Pages_Date, Pages_LastEditionDate, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor) VALUES (?, ?, ?, ?);");
@@ -337,5 +338,7 @@
 
             return $PageModel;
         }
+
+       
     }
 ?>
