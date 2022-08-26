@@ -194,6 +194,7 @@ $( document ).ready( function () {
                 maxlength: 512
             },
             "fileThumb": {
+                required: true,
                 extension: "jpg|jpeg|png"
             },
             "txtContentPT-BR": {
@@ -276,6 +277,126 @@ $( document ).ready( function () {
             $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
         }
     });
+
+    $("#createDepoimento").validate({
+        rules: {
+            "txtTitlePT-BR": {
+                required: true,
+                maxlength: 255
+            },
+            "txtTitleEN-US": {
+                required: true,
+                maxlength: 255
+            },
+            "txtTitleES-ES": {
+                required: true,
+                maxlength: 255
+            },
+            "txtTitleFR-FR": {
+                required: true,
+                maxlength: 255
+            },
+            "txtDescriptionPT-BR": {
+                required: true,
+                maxlength: 100
+            },
+            "txtDescriptionEN-US": {
+                required: true,
+                maxlength: 100
+            },
+            "txtDescriptionES-ES": {
+                required: true,
+                maxlength: 100
+            },
+            "txtDescriptionFR-FR": {
+                required: true,
+                maxlength: 100
+            },
+            "fileThumb": {
+                required: true
+            },
+            "txtContentPT-BR": {
+                required: true
+            },
+            "txtContentEN-US": {
+                required: true
+            },
+            "txtContentES-ES": {
+                required: true
+            },
+            "txtContentFR-FR": {
+                required: true
+            }
+        },
+        messages: {
+            "txtTitlePT-BR": {
+                required: "O campo título é obrigatório.",
+                maxlength: "O campo título não deve exceder 255 caracteres."
+            },
+            "txtTitleEN-US": {
+                required: "O campo título é obrigatório.",
+                maxlength: "O campo título não deve exceder 255 caracteres."
+            },
+            "txtTitleES-ES": {
+                required: "O campo título é obrigatório.",
+                maxlength: "O campo título não deve exceder 255 caracteres."
+            },
+            "txtTitleFR-FR": {
+                required: "O campo título é obrigatório.",
+                maxlength: "O campo título não deve exceder 255 caracteres."
+            },
+            "txtDescriptionPT-BR": {
+                required: "O campo descrição é obrigatório.",
+                maxlength: "O campo descrição não deve exceder 512 caracteres."
+            },
+            "txtDescriptionEN-US": {
+                required: "O campo descrição é obrigatório.",
+                maxlength: "O campo descrição não deve exceder 512 caracteres."
+            },
+            "txtDescriptionES-ES": {
+                required: "O campo descrição é obrigatório.",
+                maxlength: "O campo descrição não deve exceder 512 caracteres."
+            },
+            "txtDescriptionFR-FR": {
+                required: "O campo descrição é obrigatório.",
+                maxlength: "O campo descrição não deve exceder 512 caracteres."
+            },
+            "fileThumb": {
+                required: "Uma imagem precisa ser selecionada.",
+                extension: "Somente são aceitas imagens com extensão .jpg, .jpeg e .png."
+            },
+            "txtContentPT-BR": {
+                required: "O campo conteúdo é obrigatório."
+            },
+            "txtContentEN-US": {
+                required: "O campo conteúdo é obrigatório."
+            },
+            "txtContentES-ES": {
+                required: "O campo conteúdo é obrigatório."
+            },
+            "txtContentFR-FR": {
+                required: "O campo conteúdo é obrigatório."
+            }
+        },
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass( "invalid-feedback" );
+
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.next( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+        },
+        depoimento: function ( element, errorClass, validClass ) {
+            $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+        }
+    });
+
 
     $("#editCard").validate({
         rules: {

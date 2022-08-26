@@ -8,6 +8,8 @@
         private $DContent;
         private $DLinguage;
         private $DepoLastEditionDate; 
+        private $DepoimentoDescription;
+        private $UserLastEditionAuthor;
 
         public function getDepoimentoID() {
             return $this->DepoID;
@@ -24,11 +26,11 @@
           public function setUserAuthor($User) {
             $this->User = $User;
           }
-          public function getDepoLastEditionDate() {
+          public function getDepoimentoLastEditionDate() {
             return $this->DepoLastEditionDate;
           }
       
-          public function setDepoLastEditionDate($DepoLastEditionDate) {
+          public function setDepoimentoLastEditionDate($DepoLastEditionDate) {
             $this->DepoLastEditionDate = $DepoLastEditionDate;
           }
           public function getDepoimentoTitle() {
@@ -38,6 +40,22 @@
           public function setDepoimentoTitle($DName){
             $this->DName = $DName;
           }
+          public function getDepoimentoDescription() {
+            return $this->DepoimentoDescription;
+          }
+      
+          public function setDepoimentoDescription($DepoimentoDescription) {
+            $this->DepoimentoDescription = $DepoimentoDescription;
+          }
+          public function getUserLastEditionAuthor() {
+            return $this->UserLastEditionAuthor;
+          }
+      
+          public function setUserLastEditionAuthor($UserLastEditionAuthor) {
+            $this->UserLastEditionAuthor = $UserLastEditionAuthor;
+          }
+      
+      
           public function getDepoDate(){
             return $this->DepoDate;
           }

@@ -86,10 +86,10 @@
                   echo json_encode(array("status" => "failure", "message" => "Não foi possível criar o Highlight."));
                   exit();
                 }
-               } else {
-                echo json_encode(array("status" => "failure", "message" => "Não foi possível fazer o upload da imagem."));
-               exit();
-               }
+                } else {
+                  echo json_encode(array("status" => "failure", "message" => "Não foi possível fazer o upload da imagem."));
+                exit();
+                }
              }  else {
                  echo json_encode(array("status" => "failure", "message" => "Já existe uma imagem com este nome no servidor."));
                  exit();

@@ -19,7 +19,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" href="Depoimentos.php">
-      <i class="fas fa-fw fa-id-card"></i>
+    <i class='fas fa-comment'></i>
       <span>Depoimentos</span>
     </a>
   </li>
