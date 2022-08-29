@@ -36,6 +36,12 @@ $( document ).ready( function () {
         },
         unhighlight: function (element, errorClass, validClass) {
             $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+        },
+        depoimento: function ( element, errorClass, validClass ) {
+            $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+        },
+        undepoimento: function (element, errorClass, validClass) {
+            $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
         }
     } );
 
@@ -298,22 +304,23 @@ $( document ).ready( function () {
             },
             "txtDescriptionPT-BR": {
                 required: true,
-                maxlength: 100
+                maxlength: 512
             },
             "txtDescriptionEN-US": {
                 required: true,
-                maxlength: 100
+                maxlength: 512
             },
             "txtDescriptionES-ES": {
                 required: true,
-                maxlength: 100
+                maxlength: 512
             },
             "txtDescriptionFR-FR": {
                 required: true,
-                maxlength: 100
+                maxlength: 512
             },
             "fileThumb": {
-                required: true
+                required: true,
+                extension: "jpg|jpeg|png"
             },
             "txtContentPT-BR": {
                 required: true
@@ -392,7 +399,7 @@ $( document ).ready( function () {
         depoimento: function ( element, errorClass, validClass ) {
             $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
         },
-        unhighlight: function (element, errorClass, validClass) {
+        undepoimento: function (element, errorClass, validClass) {
             $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
         }
     });

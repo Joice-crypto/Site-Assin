@@ -3,6 +3,7 @@ require_once "Connection.php";
 require_once "UserModel.php";
 require_once "Constants.php";
 require_once "DepoimentoModel.php";
+require_once("File.php");
 
 
 if(!isset($_SESSION)) {
@@ -15,10 +16,13 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
 
   if ($Action === "create") {
     if (isset($_SESSION["UserID"]) && is_numeric($_SESSION["UserID"]) && !empty($_SESSION["UserID"]) && 
-    isset($_POST["txtTitlePT-BR"]) && isset($_POST["txtDescriptionPT-BR"]) && isset($_POST["txtContentPT-BR"]) && 
-    isset($_POST["txtTitleEN-US"]) && isset($_POST["txtDescriptionEN-US"]) && isset($_POST["txtContentEN-US"]) && 
+    isset($_POST["txtTitlePT-BR"]) && !is_numeric($_POST["txtTitlePT-BR"]) && !empty($_POST["txtTitlePT-BR"]) &&
+    isset($_POST["txtTitleEN-US"]) && !is_numeric($_POST["txtTitleEN-US"]) && !empty($_POST["txtTitleEN-US"]) &&
+    isset($_POST["txtContentPT-BR"]) && !is_numeric($_POST["txtContentPT-BR"]) && !empty($_POST["txtContentPT-BR"]) &&
+    isset($_POST["txtContentEN-US"]) && !is_numeric($_POST["txtContentEN-US"]) && !empty($_POST["txtContentEN-US"]) &&
     isset($_FILES["fileThumb"]) && strlen($_FILES["fileThumb"]["name"]) <= MAX_FILE_NAME_SIZE &&
-    strlen($_POST["txtDescriptionPT-BR"]) <= MAX_DESCRIPTION_SIZE && strlen($_POST["txtDescriptionEN-US"]) <= MAX_DESCRIPTION_SIZE) {
+    strlen($_POST["txtTitlePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleEN-US"]) <= MAX_TITLE_SIZE ) { 
+     
         if ($_FILES["fileThumb"]["size"] != 0) {
             if (!checkExistence("../../assets/pictures/", $_FILES["fileThumb"]["name"])) {
               if (uploadImage($_FILES["fileThumb"], "../../assets/pictures/")) {
@@ -49,19 +53,11 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
                 $DescriptionArray["en-us"] = strip_tags(trim(filter_input(INPUT_POST, "txtDescriptionEN-US", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
                 $ContentArray["en-us"] = trim(filter_input(INPUT_POST, "txtContentEN-US", FILTER_DEFAULT));
 
-                $TitleArray["es-es"] = strip_tags(trim(filter_input(INPUT_POST, "txtTitleES-ES", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
-                $DescriptionArray["es-es"] = strip_tags(trim(filter_input(INPUT_POST, "txtDescriptionES-ES", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
-                $ContentArray["es-es"] = trim(filter_input(INPUT_POST, "txtContentES-ES", FILTER_DEFAULT));
-
-                $TitleArray["fr-fr"] = strip_tags(trim(filter_input(INPUT_POST, "txtTitleFR-FR", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
-                $DescriptionArray["fr-fr"] = strip_tags(trim(filter_input(INPUT_POST, "txtDescriptionFR-FR", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
-                $ContentArray["fr-fr"] = trim(filter_input(INPUT_POST, "txtContentFR-FR", FILTER_DEFAULT));
-
                 $DepoimentoModel->setDepoimentoTitle($TitleArray);
                 $DepoimentoModel->setDepoimentoDescription($DescriptionArray);
                 $DepoimentoModel->setDepoimentoContent($ContentArray);
 
-                if ($DepoimentoController->createDepoimento($DepoimentoModel, $UserModel)) {
+                if ($DepoimentoController->createDepoimento($DepoimentoModel)) {
                     echo json_encode(array("status" => "success", "message" => "Depoimento criado com sucesso!"));
                     exit();
                   } else {
@@ -78,12 +74,11 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
                    exit();
                }
             }else {
-            echo json_encode(array('status' => 'failure', 'message' => "Você precisa selecionar uma imagem."));
+            echo json_encode(array("status" => "failure", "message" => "Você precisa selecionar uma imagem."));
             exit();
-            }
-           
+            }     
     } else {
-            echo json_encode(array('status' => 'failure', 'message' => "Dados inconsistentes."));
+            echo json_encode(array("status" => "failure", "message" => "Dados inconsistentes."));
             exit();
     }
           
@@ -92,12 +87,8 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
           isset($_POST["DepoimentoID"]) && is_numeric($_POST["DepoimentoID"]) && !empty($_POST["DepoimentoID"]) &&
           isset($_POST["txtTitlePT-BR"]) && !is_numeric($_POST["txtTitlePT-BR"]) && !empty($_POST["txtTitlePT-BR"]) &&
           isset($_POST["txtTitleEN-US"]) && !is_numeric($_POST["txtTitleEN-US"]) && !empty($_POST["txtTitleEN-US"]) &&
-          // isset($_POST["txtTitleES-ES"]) && !is_numeric($_POST["txtTitleES-ES"]) && !empty($_POST["txtTitleES-ES"]) &&
-          // isset($_POST["txtTitleFR-FR"]) && !is_numeric($_POST["txtTitleFR-FR"]) && !empty($_POST["txtTitleFR-FR"]) &&
           isset($_POST["txtContentPT-BR"]) && !is_numeric($_POST["txtContentPT-BR"]) && !empty($_POST["txtContentPT-BR"]) &&
           isset($_POST["txtContentEN-US"]) && !is_numeric($_POST["txtContentEN-US"]) && !empty($_POST["txtContentEN-US"]) &&
-          // isset($_POST["txtContentES-ES"]) && !is_numeric($_POST["txtContentES-ES"]) && !empty($_POST["txtContentES-ES"]) &&
-          // isset($_POST["txtContentFR-FR"]) && !is_numeric($_POST["txtContentFR-FR"]) && !empty($_POST["txtContentFR-FR"]) &&
           strlen($_POST["txtTitlePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleEN-US"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleES-ES"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleFR-FR"]) <= MAX_TITLE_SIZE) {
 
           $DepoimentoModel = new DepoimentoModel();

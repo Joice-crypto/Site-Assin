@@ -416,27 +416,34 @@ function createPage() {
   }
 }
 function createDepoimento() {
+
   if ($("#createDepoimento").valid()) {
+    $("#Alerts").empty();
+    var form_data = new FormData($('#createDepoimento')[0]);
     $.ajax({
       type: 'POST',
       url: 'app/DepoimentoController.php',
-      data: $("#createDepoimento").serialize() + "&actionDepoimento=create"
+      data: form_data,
+      processData: false,
+      contentType: false
     }).done(function(data) {
-      console.log(data);
+	console.log(data);
       var dataReturned = JSON.parse(data);
       if(dataReturned.status == 'success') {
-        $('#Alerts').prepend('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
+        $('#Alerts').append('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
         setTimeout(function() {
           window.location.href="Depoimentos.php";
         }, 2000);
       } else if(dataReturned.status == 'failure') {
-        $('#Alerts').prepend('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
+        $('#Alerts').append('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
         setTimeout(function() {
           $('#Alerts div').last().remove();
         }, 5000);
       }
     });
   }
+ 
+
 }
 
 function editDepoimento(DepoID) {
