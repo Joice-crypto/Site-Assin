@@ -415,6 +415,30 @@ function createPage() {
     });
   }
 }
+
+
+function deleteCarouselImage(idCarouselImage) {
+  $.ajax({
+    type: 'POST',
+    url: 'app/CarouselImageController.php',
+    data: {actionCarouselImage: 'delete', id: idCarouselImage}
+  }).done(function(data) {
+    var dataReturned = JSON.parse(data);
+    if(dataReturned.status == 'success') {
+      $('#Alerts').prepend('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
+      setTimeout(function() {
+        location.reload();
+      }, 2000);
+    } else if(dataReturned.status == 'failure') {
+      $('#Alerts').prepend('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
+      setTimeout(function() {
+        $('#Alerts div').last().remove();
+      }, 5000);
+    }
+  });
+}
+
+
 function createDepoimento() {
 
   if ($("#createDepoimento").valid()) {
@@ -436,9 +460,6 @@ function createDepoimento() {
         }, 2000);
       } else if(dataReturned.status == 'failure') {
         $('#Alerts').append('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
-        setTimeout(function() {
-          $('#Alerts div').last().remove();
-        }, 5000);
       }
     });
   }
@@ -446,12 +467,13 @@ function createDepoimento() {
 
 }
 
+
 function editDepoimento(DepoID) {
-  if ($("#editPage").valid()) {
+  if ($("#editDepoimento").valid()) {
     $.ajax({
       type: 'POST',
       url: 'app/DepoimentoController.php',
-      data: $("#editDEpoimento").serialize() + "&actionDepoimento=edit" + "&DepoimentoID=" + DepoID
+      data: $("#editDepoimento").serialize() + "&actionDepoimento=edit" + "&DepoimentoID=" + DepoID
     }).done(function(data) {
       console.log(data);
       var dataReturned = JSON.parse(data);
@@ -468,6 +490,30 @@ function editDepoimento(DepoID) {
       }
     });
   }
+}
+
+
+
+function deleteDepoimento(DepoimentoID) {
+  $.ajax({
+    type: 'POST',
+    url: 'app/DepoimentoController.php',
+    data: {actionDepoimento: 'delete', id: DepoimentoID}
+  }).done(function(data) {
+    console.log(data);
+    var dataReturned = JSON.parse(data);
+    if(dataReturned.status == 'success') {
+      $('#Alerts').prepend('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
+      setTimeout(function() {
+        location.reload();
+      }, 2000);
+    } else if(dataReturned.status == 'failure') {
+      $('#Alerts').prepend('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
+      setTimeout(function() {
+        $('#Alerts div').last().remove();
+      }, 5000);
+    }
+  });
 }
 
 

@@ -122,3 +122,4 @@ function changeLang(URL, Lang) {
         location.reload();
     });
 }
+

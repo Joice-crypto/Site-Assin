@@ -92,9 +92,8 @@
     <div class="container">
       <?php require_once("common/header.php"); ?>
       <div class="content">
-        <h1 class="text-center mt-3 mb-4"><?php echo $LoadData["title"]; // CARD DO IDIOMAS SEM FRONTEIRAS ?></h1>  
-        
-        <div style="word-break: break-all;">
+        <h1 class="text-center mt-3 mb-4"><?php echo $LoadData["title"]; ?></h1>
+        <div style="text-align: justify;">
           <?php echo $LoadData["content"]; ?>
         </div>
       </div>
@@ -111,3 +110,4 @@
   </body>
 
 </html>
+

@@ -41,6 +41,7 @@
 
   function deleteFile($FilePathName) {
     if(file_exists($FilePathName)) {
+      
       unlink($FilePathName);
     }
   }

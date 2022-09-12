@@ -12,8 +12,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <button class="dropdown-item" onclick="changeLang('<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>', 'pt');"><img src="assets/images/if_Brazil_flat_91992.png">&nbsp;Português</button>
       <button class="dropdown-item" onclick="changeLang('<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>', 'en');"><img src="assets/images/if_United-States_flat_92406.png">&nbsp;English</button>
-      <!-- <button class="dropdown-item" onclick="changeLang('<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>', 'es');"><img src="assets/images/if_Spain_flat_92356.png">&nbsp;Español</button> -->
-      <!--<button class="dropdown-item"  onclick="changeLang('<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>', 'fr');"><img src="assets/images/if_France_flat_92086.png">&nbsp;Français</button>-->
+     
     </div>
   </div>
   <div class="container py-5">
@@ -74,4 +73,5 @@
             </li>
         </ul>
     </div>
+  
 </nav>

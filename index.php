@@ -154,17 +154,16 @@ $GeneralSettingModel = $GeneralSettingController->getGeneralSetting("institution
 
                 <a href="page.php?type=2&id=<?php echo $CardsArray[$i]->getCardID(); ?>" class="btn btn-primary"><?php echo $lang['READ_MORE']; ?></a>
               </div>
-              <?php require_once("./aaa.php")   ?>
+              
 
             </div>
-            
-            
-            
            
-
           </div>
         <?php } ?>
+        <?php require_once("./aaa.php")   ?>
+        
       </div>
+      
       <!-- /.row -->
 
     </div>
@@ -174,9 +173,7 @@ $GeneralSettingModel = $GeneralSettingController->getGeneralSetting("institution
     <?php include_once("common/footer.php"); ?>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/base.js"></script>
+    
 </body>
 
 </html>

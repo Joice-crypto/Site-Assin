@@ -1,6 +1,6 @@
 <?php
-  define("MAX_IMAGE_SIZE", 3145728); // 3MiB
-  define("MAX_FILE_SIZE", 3145728); // 3MiB
+  define("MAX_IMAGE_SIZE", 5145728); // 4,9MiB
+  define("MAX_FILE_SIZE", 5145728); // 4,9MiB
   define("CONTENT_IMAGE_PATH", dirname(dirname(__DIR__)) . "/assets/pictures" . DIRECTORY_SEPARATOR);
   define("IMAGE_PLACEHOLDER", "iconfinder_Camera-01_1976059.png");
   define("SUPPORTED_LANGUAGES", array("pt-br", "en-us", "es-es", "fr-fr"));

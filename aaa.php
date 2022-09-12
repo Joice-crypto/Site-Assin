@@ -1,50 +1,58 @@
 <?php
-require_once('lib/Mobile_Detect.php');
-require_once('common/cookie_message.php');
-require_once('lang/common.php');
-require_once('panel/app/CarouselImageController.php');
-require_once('panel/app/HighlightController.php');
-require_once('panel/app/CardController.php');
-require_once('panel/app/DepoimentoController.php');
-require_once('panel/app/GeneralSettingController.php');
+require_once 'lib/Mobile_Detect.php';
+require_once 'common/cookie_message.php';
+require_once 'lang/common.php';
+require_once 'panel/app/CarouselImageController.php';
+require_once 'panel/app/HighlightController.php';
+require_once 'panel/app/CardController.php';
+require_once 'panel/app/DepoimentoController.php';
+require_once 'panel/app/GeneralSettingController.php';
+
+
+
+$DepoimentoController = new DepoimentoController();
+$DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
+
 
 ?>
 
+
 <link rel="stylesheet" href="css\business-frontpage.css">
 <!-- Bootstrap CSS -->
-<div class="teste">
-  <div class="card" style="width: 20rem;">
+<div class="teste" style="width: 20rem;">
+  <div class="card" >
     <div class="card-body">
 
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators" >
-      <li data-target="#carouselExampleIndicators"  data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
+      
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <a href="assets\files\Relatorio Final Dayse.pdf"><img class="d-block2 " src="assets\images\IMG_20170308_141328030.jpg" alt="First slide"></a>
-            <h5>Dayse Maria Pena - Letras<br> UGA 2017</h5>
-            <p class="a">Há alunos voluntários que ficam por conta de receber os intercambistas assim que eles chegam na
-              universidade. A minha voluntária foi me buscar no hotel (pois eu cheguei antes da data de entrada na
-              universidade) para me levar para a UGA</p>
-
+          
+          <?php for ($i = 0; $i < count($DepoimentosArray); $i++) {
+            if ($i == 0) { ?>
+            <div class="carousel-item active">
+            <img style="margin-top:10px;
+                  width: 100px;
+                  height: 90px;
+                  border-radius:47%;
+                  margin-left: 40%;"  src="assets\images\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide"></a>
+            <h5 style="  text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?>"</h5>
+            <p style="  color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
+            </div>
+            <?php } else { ?>
+              <div class="carousel-item">
+              <img style="margin-top:10px;
+                  width: 100px;
+                  height: 90px;
+                  border-radius:47%;
+                  margin-left: 40%;"  src="assets\images\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>"  alt="First slide"  ></a>
+                <h5 style="  text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?>"</h5>
+                <p style="  color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
+              </div>
+          <?php }
+          } ?>
+           
           </div>
-          <div class="carousel-item">
-            <a href="assets\files\RELATORIO FINAL DE INTERCAMBIO - MARTINIANO FILHO.pdf"><img  class="d-block2 " src="assets\images\Martin - Lakehead University.jpg" alt="Second slide"></a>
-            <h5> Martiniano Alves - Engenharia Civil (Lakehead University - ELAP) 2019/2</h5>
-            <p class="a">Há alunos voluntários que ficam por conta de receber os intercambistas assim que eles chegam na
-              universidade. A minha voluntária foi me buscar no hotel (pois eu cheguei antes da data de entrada na
-              universidade) para me levar para a UGA</p>
-          </div>
-          <div class="carousel-item">
-            <a href="assets\files\relatorio_final_virginia.pdf"><img class="d-block2 " src="assets\images\WhatsApp Image 2017-06-05 at  13_04_21.jpg" alt="Third slide"></a>
-            <h5>Virgínia Della Sávia Brasil - Letras UGA 2017/1</h5>
-            <p class="a">Há alunos voluntários que ficam por conta de receber os intercambistas assim que eles chegam na
-              universidade. A minha voluntária foi me buscar no hotel (pois eu cheguei antes da data de entrada na
-              universidade) para me levar para a UGA</p>
-          </div>
+         
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -36,12 +36,6 @@ $( document ).ready( function () {
         },
         unhighlight: function (element, errorClass, validClass) {
             $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
-        },
-        depoimento: function ( element, errorClass, validClass ) {
-            $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
-        },
-        undepoimento: function (element, errorClass, validClass) {
-            $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
         }
     } );
 
@@ -52,14 +46,6 @@ $( document ).ready( function () {
                 maxlength: 255
             },
             "txtTitleEN-US": {
-                required: true,
-                maxlength: 255
-            },
-            "txtTitleES-ES": {
-                required: true,
-                maxlength: 255
-            },
-            "txtTitleFR-FR": {
                 required: true,
                 maxlength: 255
             },
@@ -294,27 +280,11 @@ $( document ).ready( function () {
                 required: true,
                 maxlength: 255
             },
-            "txtTitleES-ES": {
-                required: true,
-                maxlength: 255
-            },
-            "txtTitleFR-FR": {
-                required: true,
-                maxlength: 255
-            },
             "txtDescriptionPT-BR": {
                 required: true,
                 maxlength: 512
             },
             "txtDescriptionEN-US": {
-                required: true,
-                maxlength: 512
-            },
-            "txtDescriptionES-ES": {
-                required: true,
-                maxlength: 512
-            },
-            "txtDescriptionFR-FR": {
                 required: true,
                 maxlength: 512
             },
@@ -327,12 +297,6 @@ $( document ).ready( function () {
             },
             "txtContentEN-US": {
                 required: true
-            },
-            "txtContentES-ES": {
-                required: true
-            },
-            "txtContentFR-FR": {
-                required: true
             }
         },
         messages: {
@@ -344,27 +308,11 @@ $( document ).ready( function () {
                 required: "O campo título é obrigatório.",
                 maxlength: "O campo título não deve exceder 255 caracteres."
             },
-            "txtTitleES-ES": {
-                required: "O campo título é obrigatório.",
-                maxlength: "O campo título não deve exceder 255 caracteres."
-            },
-            "txtTitleFR-FR": {
-                required: "O campo título é obrigatório.",
-                maxlength: "O campo título não deve exceder 255 caracteres."
-            },
             "txtDescriptionPT-BR": {
                 required: "O campo descrição é obrigatório.",
                 maxlength: "O campo descrição não deve exceder 512 caracteres."
             },
             "txtDescriptionEN-US": {
-                required: "O campo descrição é obrigatório.",
-                maxlength: "O campo descrição não deve exceder 512 caracteres."
-            },
-            "txtDescriptionES-ES": {
-                required: "O campo descrição é obrigatório.",
-                maxlength: "O campo descrição não deve exceder 512 caracteres."
-            },
-            "txtDescriptionFR-FR": {
                 required: "O campo descrição é obrigatório.",
                 maxlength: "O campo descrição não deve exceder 512 caracteres."
             },
@@ -376,12 +324,6 @@ $( document ).ready( function () {
                 required: "O campo conteúdo é obrigatório."
             },
             "txtContentEN-US": {
-                required: "O campo conteúdo é obrigatório."
-            },
-            "txtContentES-ES": {
-                required: "O campo conteúdo é obrigatório."
-            },
-            "txtContentFR-FR": {
                 required: "O campo conteúdo é obrigatório."
             }
         },

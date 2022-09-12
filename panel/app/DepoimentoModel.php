@@ -54,8 +54,6 @@
           public function setUserLastEditionAuthor($UserLastEditionAuthor) {
             $this->UserLastEditionAuthor = $UserLastEditionAuthor;
           }
-      
-      
           public function getDepoDate(){
             return $this->DepoDate;
           }

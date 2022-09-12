@@ -14,10 +14,10 @@
             if (isset($_POST["txtRedirection"]) && !is_numeric($_POST["txtRedirection"]) && !empty($_POST["txtRedirection"]) &&
                 isset($_POST["txtNamePT-BR"]) && !is_numeric($_POST["txtNamePT-BR"]) && !empty($_POST["txtNamePT-BR"]) &&
                 isset($_POST["txtNameEN-US"]) && !is_numeric($_POST["txtNameEN-US"]) && !empty($_POST["txtNameEN-US"]) &&
-                // isset($_POST["txtNameES-ES"]) && !is_numeric($_POST["txtNameES-ES"]) && !empty($_POST["txtNameES-ES"]) &&
-                // isset($_POST["txtNameFR-FR"]) && !is_numeric($_POST["txtNameFR-FR"]) && !empty($_POST["txtNameFR-FR"]) &&
+                isset($_POST["txtNameES-ES"]) && !is_numeric($_POST["txtNameES-ES"]) && !empty($_POST["txtNameES-ES"]) &&
+                isset($_POST["txtNameFR-FR"]) && !is_numeric($_POST["txtNameFR-FR"]) && !empty($_POST["txtNameFR-FR"]) &&
                 isset($_POST["MenuLevel"]) && is_numeric($_POST["MenuLevel"]) && isset($_POST["MenuSonOf"]) &&
-                strlen($_POST["txtNamePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameEN-US"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameES-ES"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameFR-FR"]) <= MAX_TITLE_SIZE) {
+                strlen($_POST["txtNamePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameEN-US"]) <= MAX_TITLE_SIZE) {
 
                 if (!filter_input(INPUT_POST, "txtRedirection", FILTER_VALIDATE_URL)) {
                     echo json_encode(array("status" => "failure", "message" => "URL inválida."));
@@ -33,8 +33,8 @@
     
                 $NameArray["pt-br"] = strip_tags(trim(filter_input(INPUT_POST, "txtNamePT-BR", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
                 $NameArray["en-us"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameEN-US", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
-                // $NameArray["es-es"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameES-ES", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
-                // $NameArray["fr-fr"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameFR-FR", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
+                $NameArray["es-es"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameES-ES", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
+                $NameArray["fr-fr"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameFR-FR", FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW)));
     
                 $MenuModel->setMenuName($NameArray);
                 $MenuLevel = filter_input(INPUT_POST, "MenuLevel", FILTER_SANITIZE_NUMBER_INT);
@@ -56,10 +56,10 @@
                 isset($_POST["txtEditRedirection"]) && !is_numeric($_POST["txtEditRedirection"]) && !empty($_POST["txtEditRedirection"]) &&
                 isset($_POST["txtNamePT-BR"]) && !is_numeric($_POST["txtNamePT-BR"]) && !empty($_POST["txtNamePT-BR"]) &&
                 isset($_POST["txtNameEN-US"]) && !is_numeric($_POST["txtNameEN-US"]) && !empty($_POST["txtNameEN-US"]) &&
-                // isset($_POST["txtNameES-ES"]) && !is_numeric($_POST["txtNameES-ES"]) && !empty($_POST["txtNameES-ES"]) &&
-                // isset($_POST["txtNameFR-FR"]) && !is_numeric($_POST["txtNameFR-FR"]) && !empty($_POST["txtNameFR-FR"]) &&
+                isset($_POST["txtNameES-ES"]) && !is_numeric($_POST["txtNameES-ES"]) && !empty($_POST["txtNameES-ES"]) &&
+                isset($_POST["txtNameFR-FR"]) && !is_numeric($_POST["txtNameFR-FR"]) && !empty($_POST["txtNameFR-FR"]) &&
                 isset($_POST["MenuLevel"]) && is_numeric($_POST["MenuLevel"]) &&
-                strlen($_POST["txtNamePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameEN-US"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameES-ES"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameFR-FR"]) <= MAX_TITLE_SIZE) {
+                strlen($_POST["txtNamePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtNameEN-US"]) <= MAX_TITLE_SIZE) {
 
                 if (!filter_input(INPUT_POST, "txtEditRedirection", FILTER_VALIDATE_URL)) {
                     echo json_encode(array("status" => "failure", "message" => "URL inválida."));
@@ -76,8 +76,8 @@
 
                 $NameArray["pt-br"] = strip_tags(trim(filter_input(INPUT_POST, "txtNamePT-BR", FILTER_DEFAULT)));
                 $NameArray["en-us"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameEN-US", FILTER_DEFAULT)));
-                // $NameArray["es-es"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameES-ES", FILTER_DEFAULT)));
-                // $NameArray["fr-fr"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameFR-FR", FILTER_DEFAULT)));
+                $NameArray["es-es"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameES-ES", FILTER_DEFAULT)));
+                $NameArray["fr-fr"] = strip_tags(trim(filter_input(INPUT_POST, "txtNameFR-FR", FILTER_DEFAULT)));
 
                 $MenuModel->setMenuName($NameArray);
                 $MenuLevel = filter_input(INPUT_POST, "MenuLevel", FILTER_SANITIZE_NUMBER_INT);

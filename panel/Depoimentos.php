@@ -3,7 +3,7 @@
   require_once('app/DepoimentoController.php');
 
   $DepoimentoController = new DepoimentoController();
-  $DepoimentoArray = $DepoimentoController->getAllDepoimentos("pt-br");
+  $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
 ?>
 
 <!DOCTYPE html>
@@ -74,23 +74,25 @@
                       <th>Data do Depoimento</th>
                       <th>Data Última Atualização</th>
                       <th>Autor Original</th>
+                      <th>Autor Última Atualização</th>
                       <th>Controles</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    if(count($DepoimentoArray) == 0) {
+                    if(count($DepoimentosArray) == 0) {
                       ?>
                       <td colspan="6" class="text-center">Não há depoimentos.</td>
                       <?php
                     } else {
-                      foreach ($DepoimentoArray as $Depoimento) {
+                      foreach ($DepoimentosArray as $Depoimento) {
                         ?>
                         <tr>
                           <td><?php echo $Depoimento->getDepoimentoTitle(); ?></td>
                           <td><?php echo date_format(date_create($Depoimento->getDepoDate()), 'd/m/Y'); ?></td>
-                          <td><?php echo date_format(date_create($Depoimento->getDepoLastEditionDate()), 'd/m/Y'); ?></td>
+                          <td><?php echo date_format(date_create($Depoimento->getDepoimentoLastEditionDate()), 'd/m/Y'); ?></td>
                           <td><?php echo $Depoimento->getUserAuthor()->getUserName(); ?></td>
+                          <td><?php echo $Depoimento->getUserLastEditionAuthor()->getUserName(); ?></td>
                           <td class="text-center"><a href="editDepoimento.php?id=<?php echo $Depoimento->getDepoimentoID(); ?>"><i class="fas fa-fw fa-edit"></i></a><a class="text-danger" onclick="deleteDepoimento(<?php echo $Depoimento->getDepoimentoID(); ?>);"><i class="fas fa-fw fa-trash-alt"></i></a><a class="text-danger"></tr>
                         </tr>
                         <?php
@@ -101,15 +103,13 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted"><?php echo count($DepoimentoArray); ?> resultado(s). Atualizado hoje <?php echo date('H:i'); ?></div>
+            <div class="card-footer small text-muted"><?php echo count($DepoimentosArray); ?> resultado(s). Atualizado hoje <?php echo date('H:i'); ?></div>
           </div>
           <button type="button" onclick="window.location.href='createDepoimento.php'" class="btn btn-primary w-100 mb-3">Criar Depoimento</button>
           <div id="Alerts"></div>
         </div>
-
-        <?php require_once("common/footer.php"); ?>
-
 </div>
+<?php require_once("common/footer.php"); ?>
 <!-- /.content-wrapper -->
 
 </div>

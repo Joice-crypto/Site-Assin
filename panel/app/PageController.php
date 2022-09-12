@@ -53,7 +53,7 @@
                 $PageModel->setPageContent($ContentArray);
 
                 
-                if ($PageController->createDepoimento($PageModel)) {
+                if ($PageController->createPage($PageModel)) {
                     echo json_encode(array("status" => "success", "message" => "Página criada com sucesso!"));
                     exit();
                 } else {
@@ -75,7 +75,7 @@
                 isset($_POST["txtContentEN-US"]) && !is_numeric($_POST["txtContentEN-US"]) && !empty($_POST["txtContentEN-US"]) &&
                 // isset($_POST["txtContentES-ES"]) && !is_numeric($_POST["txtContentES-ES"]) && !empty($_POST["txtContentES-ES"]) &&
                 // isset($_POST["txtContentFR-FR"]) && !is_numeric($_POST["txtContentFR-FR"]) && !empty($_POST["txtContentFR-FR"]) &&
-                strlen($_POST["txtTitlePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleEN-US"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleES-ES"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleFR-FR"]) <= MAX_TITLE_SIZE) {
+                strlen($_POST["txtTitlePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleEN-US"]) ) {
 
                 $PageModel = new PageModel();
                 $UserModel = new UserModel();
@@ -144,7 +144,7 @@
     }
 
     class PageController {
-        public function createDepoimento($PageModel) {
+        public function createPage($PageModel) {
             global $pdo;
 
             $PageQuery = $pdo->prepare("INSERT INTO Pages (Pages_Date, Pages_LastEditionDate, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor) VALUES (?, ?, ?, ?);");
@@ -225,7 +225,7 @@
         public function getPages($PageLanguage) {
             global $pdo;
 
-            $PageQuery = $pdo->prepare("SELECT Pages_ID, Pages_Date, Pages_LastEditionDate, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor, PagesTranslations_Language, PagesTranslations_Title, PagesTranslations_Content, IJ1.Users_Name AS Users_Name_Author, IJ2.Users_Name AS Users_Name_LastEditionAuthor FROM Pages INNER JOIN PagesTranslations ON Pages.Pages_ID = PagesTranslations.Pages_ID_FK INNER JOIN Users AS IJ1 ON IJ1.Users_ID = Pages.Users_ID_FK_Author INNER JOIN Users AS IJ2 ON IJ2.Users_ID = Pages.Users_ID_FK_LastEditionAuthor WHERE PagesTranslations_Language = ?;");
+            $PageQuery = $pdo->prepare("SELECT Pages_ID, Pages_Date, Pages_LastEditionDate, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor, PagesTranslations_Language, PagesTranslations_Title, PagesTranslations_Content, IJ1.Users_Name AS Users_Name_Author, IJ2.Users_Name AS Users_Name_LastEditionAuthor FROM Pages INNER JOIN PagesTranslations ON Pages.Pages_ID = PagesTranslations.Pages_ID_FK INNER JOIN Users AS IJ1 ON IJ1.Users_ID = Pages.Users_ID_FK_Author INNER JOIN Users AS IJ2 ON IJ2.Users_ID = Pages.Users_ID_FK_LastEditionAuthor WHERE PagesTranslations_Language = ? ORDER BY PagesTranslations_Title asc ;");
             $PageQuery->bindValue(1, $PageLanguage, PDO::PARAM_STR);
 
             $PagesArray = array();

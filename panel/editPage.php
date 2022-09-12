@@ -127,12 +127,12 @@
                 <div class="tab-pane fade mt-1" id="english" role="tabpanel" aria-labelledby="en-US-tab">
                   <textarea id="txtContent-enus" name="txtContentEN-US"><?php echo $EditPage->getPageContent()["en-us"]; ?></textarea>
                 </div>
-                <div class="tab-pane fade mt-1" id="spanish" role="tabpanel" aria-labelledby="es-ES-tab">
+                <!-- <div class="tab-pane fade mt-1" id="spanish" role="tabpanel" aria-labelledby="es-ES-tab">
                   <textarea id="txtContent-eses" name="txtContentES-ES"><?php echo $EditPage->getPageContent()["es-es"]; ?></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="french" role="tabpanel" aria-labelledby="fr-FR-tab">
                   <textarea id="txtContent-frfr" name="txtContentFR-FR"><?php echo $EditPage->getPageContent()["fr-fr"]; ?></textarea>
-                </div>
+                </div> -->
               </div>
             </div>
           </form>

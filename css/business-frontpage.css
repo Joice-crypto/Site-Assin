@@ -26,16 +26,20 @@ body {
 
 .content {
   min-height: 900px;
-  padding: 15px;
+  padding: 16px;
   background-color: #F7F7F7;
   border-style: solid;
   border-color: #dfdfdf;
   border-width: 0px 1px 0px 1px;
+
+
 }
 
 .carousel-img {
     transform: translateY(-25%);
 }
+
+
 
 .business-header {
   height: 60vh;
@@ -204,36 +208,10 @@ input[type="text"]:focus {
 .SearchItem:hover {
   background-color: #c0c0c0;
 }
+.teste {
 
-.teste{
- position: absolute;
-  
-  justify-content: center;
-bottom: -3px;
-margin-left: 760px;
-}
-
-.d-block2 {
   position: relative;
-  margin-top:10px;
-  width: 100px;
-  height: 90px;
-  border-radius:47%;
-  margin-left: 40%;
-
-}
-.carousel-inner p {
-  
-  color: #000;
-  margin-top: 10px;
-  text-align:justify ;
-  
-}
-.carousel-inner h5{
-  text-align: center;
-  color: #000;
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 23px;
 }
 
 
