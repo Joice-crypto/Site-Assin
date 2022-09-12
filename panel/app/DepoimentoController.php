@@ -183,17 +183,10 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
 
         if ($DepoimentoQuery->execute()) {
             return true;
-        } else {
-            $DepoimentoQuery = $pdo->prepare("DELETE FROM Depoimentos WHERE DepoimentosID = ?;");
-            $DepoimentoQuery->bindValue(1, $ID, PDO::PARAM_INT);
-
-            $DepoimentoQuery->execute();
-
-            return false;
-        }
-    } else {
+        } 
+          } else {
         return false;
-    }
+        }
 }
 
     public function getAllDepoimentos($DepoimentosLanguage){ // vai pegar todos os depoimentos
