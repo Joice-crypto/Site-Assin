@@ -417,27 +417,6 @@ function createPage() {
 }
 
 
-function deleteCarouselImage(idCarouselImage) {
-  $.ajax({
-    type: 'POST',
-    url: 'app/CarouselImageController.php',
-    data: {actionCarouselImage: 'delete', id: idCarouselImage}
-  }).done(function(data) {
-    var dataReturned = JSON.parse(data);
-    if(dataReturned.status == 'success') {
-      $('#Alerts').prepend('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
-      setTimeout(function() {
-        location.reload();
-      }, 2000);
-    } else if(dataReturned.status == 'failure') {
-      $('#Alerts').prepend('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
-      setTimeout(function() {
-        $('#Alerts div').last().remove();
-      }, 5000);
-    }
-  });
-}
-
 
 function createDepoimento() {
 

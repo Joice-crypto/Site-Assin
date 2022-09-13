@@ -68,7 +68,7 @@
             </li>
             <li class="breadcrumb-item active">Editar</li>
             <li class="breadcrumb-item active">Depoimentos</li>
-            <li class="breadcrumb-item active"><?php echo $EditDepoimento->getDepoimentoTitle()[""]; ?></li>
+            <li class="breadcrumb-item active"><?php   echo isset($EditDepoimento->getDepoimentoTitle()["pt-br"]) ? count($EditDepoimento->getDepoimentoTitle()["pt-br"]) : 0; ?></li>
           </ol>
           <form id="editDepoimento">
             <input type="hidden" name="actionDepoimento" value="edit">
@@ -96,12 +96,12 @@
                 <div class="tab-pane fade mt-1" id="title_english" role="tabpanel" aria-labelledby="en-US-tab">
                   <input type="text" name="txtTitleEN-US" class="form-control" value="<?php echo $EditDepoimento->getDepoimentoTitle()["en-us"]; ?>">
                 </div>
-                <div class="tab-pane fade mt-1" id="title_spanish" role="tabpanel" aria-labelledby="es-ES-tab">
+                <!-- <div class="tab-pane fade mt-1" id="title_spanish" role="tabpanel" aria-labelledby="es-ES-tab">
                   <input type="text" name="txtTitleES-ES" class="form-control" value="<?php echo $EditDepoimento->getDepoimentoTitle()["es-es"]; ?>">
                 </div>
                 <div class="tab-pane fade mt-1" id="title_french" role="tabpanel" aria-labelledby="fr-FR-tab">
                   <input type="text" name="txtTitleFR-FR" class="form-control" value="<?php echo $EditDepoimento->getDepoimentoTitle()["fr-fr"]; ?>">
-                </div>
+                </div> -->
               </div>
             </div>
             <hr>

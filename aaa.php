@@ -10,6 +10,9 @@ require_once 'panel/app/GeneralSettingController.php';
 
 
 
+// $DepoimentoController = new DepoimentoController();
+// $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
+
 $DepoimentoController = new DepoimentoController();
 $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
 
@@ -19,6 +22,7 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
 
 <link rel="stylesheet" href="css\business-frontpage.css">
 <!-- Bootstrap CSS -->
+
 <div class="teste" style="width: 20rem;">
   <div class="card" >
     <div class="card-body">
@@ -34,7 +38,7 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
                   width: 100px;
                   height: 90px;
                   border-radius:47%;
-                  margin-left: 40%;"  src="assets\images\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide"></a>
+                  margin-left: 40%;"  src="assets/pictures/fotos/ <?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide"></a>
             <h5 style="  text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?>"</h5>
             <p style="  color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
             </div>
@@ -44,7 +48,7 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
                   width: 100px;
                   height: 90px;
                   border-radius:47%;
-                  margin-left: 40%;"  src="assets\images\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>"  alt="First slide"  ></a>
+                  margin-left: 40%;"  src="assets\pictures\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>"  alt="First slide"  ></a>
                 <h5 style="  text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?>"</h5>
                 <p style="  color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
               </div>

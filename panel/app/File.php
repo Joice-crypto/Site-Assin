@@ -40,7 +40,7 @@
   }
 
   function deleteFile($FilePathName) {
-    if(file_exists($FilePathName)) {
+    if(file_exists($FilePathName) && is_file($FilePathName)) {
       
       unlink($FilePathName);
     }

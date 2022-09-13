@@ -66,11 +66,12 @@
           public function setDepoimentoThumbnail($DImage){
             $this->$DImage = $DImage;
           }
-          public function getDepoimentoContent(){
+          public function getDepoimentoContent() {
             return $this->DContent;
           }
-          public function setDepoimentoContent($DContent){
-            $this->$DContent = $DContent;
+      
+          public function setDepoimentoContent($DContent) {
+            $this->DContent = $DContent;
           }
           public function getDepoimentoLanguage(){
             return $this->DLinguage;
