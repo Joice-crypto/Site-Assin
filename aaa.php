@@ -1,21 +1,15 @@
 <?php
-require_once 'lib/Mobile_Detect.php';
-require_once 'common/cookie_message.php';
-require_once 'lang/common.php';
-require_once 'panel/app/CarouselImageController.php';
-require_once 'panel/app/HighlightController.php';
-require_once 'panel/app/CardController.php';
-require_once 'panel/app/DepoimentoController.php';
-require_once 'panel/app/GeneralSettingController.php';
 
-
-
-// $DepoimentoController = new DepoimentoController();
-// $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
+require_once('lang/common.php');
+require_once('panel/app/DepoimentoController.php');
+require_once('panel/app/GeneralSettingController.php');
 
 $DepoimentoController = new DepoimentoController();
 $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
 
+
+$DepoimentoController = new DepoimentoController();
+$DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
 
 ?>
 
@@ -30,17 +24,22 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       
         <div class="carousel-inner">
+
+
+
           
           <?php for ($i = 0; $i < count($DepoimentosArray); $i++) {
             if ($i == 0) { ?>
             <div class="carousel-item active">
-            <img style="margin-top:10px;
+           
+        <?php var_dump($DepoimentosArray[$i]->getDepoimentoThumbnail()); ?>
+             <img style="margin-top:10px;
                   width: 100px;
                   height: 90px;
                   border-radius:47%;
-                  margin-left: 40%;"  src="assets/pictures/fotos/ <?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide"></a>
-            <h5 style="  text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?>"</h5>
-            <p style="  color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
+                  margin-left: 40%;" src="/assets/pictures/slides/<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide">
+            <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?></h5>
+            <p style="color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
             </div>
             <?php } else { ?>
               <div class="carousel-item">
@@ -48,9 +47,9 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
                   width: 100px;
                   height: 90px;
                   border-radius:47%;
-                  margin-left: 40%;"  src="assets\pictures\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>"  alt="First slide"  ></a>
-                <h5 style="  text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?>"</h5>
-                <p style="  color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
+                  margin-left: 40%;"  src="assets/pictures/slides/<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide">
+                <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?></h5>
+                <p style="color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
               </div>
           <?php }
           } ?>
@@ -69,12 +68,10 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
       </div>
     </div>
   </div>
-</div>
-
-
 
 
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="js/base.js"></script>
+
