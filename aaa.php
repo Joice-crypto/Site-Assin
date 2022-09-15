@@ -4,12 +4,11 @@ require_once('lang/common.php');
 require_once('panel/app/DepoimentoController.php');
 require_once('panel/app/GeneralSettingController.php');
 
-$DepoimentoController = new DepoimentoController();
-$DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
 
 
+
 $DepoimentoController = new DepoimentoController();
-$DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
+$DepoimentosArray = $DepoimentoController->getAllDepoimentos($lang["CURRENT_LANG_ISO"]);
 
 ?>
 
@@ -25,19 +24,16 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
       
         <div class="carousel-inner">
 
-
-
-          
+    
           <?php for ($i = 0; $i < count($DepoimentosArray); $i++) {
             if ($i == 0) { ?>
             <div class="carousel-item active">
-           
-        <?php var_dump($DepoimentosArray[$i]->getDepoimentoThumbnail()); ?>
+        
              <img style="margin-top:10px;
                   width: 100px;
                   height: 90px;
                   border-radius:47%;
-                  margin-left: 40%;" src="/assets/pictures/slides/<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide">
+                  margin-left: 40%;" src="/assets/pictures/slides/<?php var_dump($DepoimentosArray[$i]->getDepoimentoThumbnail()) ; ?>" alt="First slide">
             <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?></h5>
             <p style="color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
             </div>

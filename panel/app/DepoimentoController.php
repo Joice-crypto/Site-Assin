@@ -20,19 +20,19 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
     isset($_POST["txtTitleEN-US"]) && !is_numeric($_POST["txtTitleEN-US"]) && !empty($_POST["txtTitleEN-US"]) &&
     isset($_POST["txtContentPT-BR"]) && !is_numeric($_POST["txtContentPT-BR"]) && !empty($_POST["txtContentPT-BR"]) &&
     isset($_POST["txtContentEN-US"]) && !is_numeric($_POST["txtContentEN-US"]) && !empty($_POST["txtContentEN-US"]) &&
-    isset($_FILES["fileThumbArq"]) && strlen($_FILES["fileThumbArq"]["name"]) <= MAX_FILE_NAME_SIZE &&
+    isset($_FILES["fileThumb"]) && strlen($_FILES["fileThumb"]["name"]) <= MAX_FILE_NAME_SIZE &&
     strlen($_POST["txtTitlePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleEN-US"]) <= MAX_TITLE_SIZE ) { 
      
         
-      if ($_FILES["fileThumbArq"]["size"] != 0) {
-        if (!checkExistence("../../assets/pictures/slides/" , $_FILES["fileThumbArq"]["name"])) {
-          if (uploadImage($_FILES["fileThumbArq"] , "../../assets/pictures/slides/"))  {
+      if ($_FILES["fileThumb"]["size"] != 0) {
+        if (!checkExistence("../../assets/pictures/slides/" , $_FILES["fileThumb"]["name"])) {
+          if (uploadImage($_FILES["fileThumb"] , "../../assets/pictures/slides/"))  {
             $DepoimentoModel = new DepoimentoModel();
             $UserModel = new UserModel();
             $DepoimentoController = new DepoimentoController();
             $DepoimentoModel->setDepoDate(date("Y-m-d"));
             $DepoimentoModel->setDepoimentoLastEditionDate(date("Y-m-d"));
-            $DepoimentoModel->setDepoimentoThumbnail(strip_tags(trim($_FILES["fileThumbArq"]["name"])));
+            $DepoimentoModel->setDepoimentoThumbnail($_FILES["fileThumb"]["name"]);
             $UserModel->setUserID($_SESSION["UserID"]);
             $DepoimentoModel->setUserAuthor($UserModel);
             $DepoimentoModel->setUserLastEditionAuthor($UserModel);
@@ -58,7 +58,7 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
               echo json_encode(array("status" => "success", "message" => "Depoimento criado com sucesso!"));
               exit();
             } else {
-              deleteFile("../../assets/pictures/slides/" . $_FILES["fileThumbArq"]["name"]);
+              deleteFile("../../assets/pictures/slides/" . $_FILES["fileThumb"]["name"]);
               echo json_encode(array("status" => "failure", "message" => "Não foi possível criar o Depoimento."));
               exit();
             }
@@ -162,7 +162,7 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
   public function createDepoimento($DepoimentoModel) {
     global $pdo;
 
-    $DepoimentoQuery = $pdo->prepare("INSERT INTO Depoimentos(Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor) VALUES (?, ?, ?, ?, ?);");
+    $DepoimentoQuery = $pdo->prepare("INSERT INTO Depoimentos(Depoimentos_Date, Depoimentos_LastEditonDate,Depoimentos_Thumbnail, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor) VALUES (?, ?, ?, ?, ?);");
     $DepoimentoQuery->bindValue(1, $DepoimentoModel->getDepoDate(), PDO::PARAM_STR);
     $DepoimentoQuery->bindValue(2, $DepoimentoModel->getDepoimentoLastEditionDate(), PDO::PARAM_STR);
     $DepoimentoQuery->bindValue(3, $DepoimentoModel->getDepoimentoThumbnail(), PDO::PARAM_STR);
@@ -194,17 +194,48 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
   }
 
 
+  public function getLastestDepoimentos($DepoimentoLanguage){ // vai pegar os ultimos depoimentos
+
+    global $pdo;
+
+    $DepoimentosQuery = $pdo->prepare("SELECT DepoimentosID, Depoimentos_Thumbnail,Depoimentos_Date, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content  FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosTranslations_Language = ? ;");
+    $DepoimentosQuery->bindValue(1, $DepoimentoLanguage, PDO::PARAM_STR);
+
+    $arr_Depoimentos = array();
+
+    if ($DepoimentosQuery->execute()) {
+      while($Row = $DepoimentosQuery->fetch()) {
+        $Depoimento = new DepoimentoModel();
+        $Depoimento->setDepoimentoID($Row["DepoimentosID"]);
+        $Depoimento->setDepoDate($Row["Depoimentos_Date"]);
+        $Depoimento->setDepoimentoThumbnail($Row["Depoimentos_Thumbnail"]);
+        $Depoimento->setDepoimentoLanguage($Row["DepoimentosTranslations_Language"]);
+        $Depoimento->setDepoimentoTitle($Row["DepoimentosTranslations_Title"]);
+        $Depoimento->setDepoimentoDescription($Row["DepoimentosTranslations_Description"]);
+        $Depoimento->setDepoimentoContent($Row["DepoimentosTranslations_Content"]);
+        
+        
+
+        array_push($arr_Depoimentos, $Depoimento);
+      }
+    }
+
+
+    return $arr_Depoimentos;
+   
+  }
+
 
     public function getAllDepoimentos($DepoimentosLanguage){ // vai pegar todos os depoimentos
 
       global $pdo;
-
+    
       $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor, IJ1.Users_Name, IJ2.Users_Name, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK INNER JOIN Users AS IJ1 ON IJ1.Users_ID = Depoimentos.Users_ID_FK_Author INNER JOIN Users AS IJ2 ON IJ2.Users_ID = Depoimentos.Users_ID_FK_LastEditionAuthor WHERE DepoimentosTranslations.DepoimentosTranslations_Language = ?;");
-      $DepoimentoQuery->bindValue(1, $DepoimentosLanguage, PDO::PARAM_STR);       
-
+      $DepoimentoQuery->bindValue(1, $DepoimentosLanguage, PDO::PARAM_STR); 
       $DepoimentosArray = array();
 
-      $DepoimentoQuery->execute();
+  
+      $DepoimentoQuery->execute();  
 
       while ($Row = $DepoimentoQuery->fetch()) {
         $DepoimentoModel = new DepoimentoModel();
@@ -231,7 +262,7 @@ if (isset($_POST["actionDepoimento"]) && !is_numeric($_POST["actionDepoimento"])
         array_push($DepoimentosArray, $DepoimentoModel);
       }
 
-      return $DepoimentosArray;
+      return  $DepoimentosArray;
 
 
     }

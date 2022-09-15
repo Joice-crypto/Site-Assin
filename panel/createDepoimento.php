@@ -1,8 +1,4 @@
 
-<?php
-require_once 'app/DepoimentoModel.php';
-require_once './app/DepoimentoController.php';
-?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -128,7 +124,7 @@ require_once './app/DepoimentoController.php';
             <hr>
             <div class="form-group">
               <label for="InputThumb">Thumbnail</label>
-              <input type="file" name="fileThumbArq" class="form-control-file" id="InputThumb">
+              <input type="file" name="fileThumb" class="form-control-file" id="InputThumb">
             </div>
             <hr>
             <div class="form-group">

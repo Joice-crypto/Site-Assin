@@ -4,6 +4,7 @@
 
   $DepoimentoController = new DepoimentoController();
   $DepoimentosArray = $DepoimentoController->getAllDepoimentos("pt-br");
+
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +89,7 @@
                       foreach ($DepoimentosArray as $Depoimento) {
                         ?>
                         <tr>
-                          <td><?php echo $Depoimento->getDepoimentoTitle(); ?></td>
+                          <td><?php var_dump($Depoimento->getDepoimentoThumbnail());  ?></td>
                           <td><?php echo date_format(date_create($Depoimento->getDepoDate()), 'd/m/Y'); ?></td>
                           <td><?php echo date_format(date_create($Depoimento->getDepoimentoLastEditionDate()), 'd/m/Y'); ?></td>
                           <td><?php echo $Depoimento->getUserAuthor()->getUserName(); ?></td>

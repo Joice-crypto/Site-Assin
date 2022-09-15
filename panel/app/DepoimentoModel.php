@@ -1,7 +1,7 @@
 <?php
     class DepoimentoModel {
         private $DepoID;
-        private $DImage;
+        private $DepoimentoThumbnail;
         private $User;
         private $DName;
         private $DepoDate;
@@ -61,10 +61,10 @@
             $this->$DepoDate = $DepoDate;
           }
           public function getDepoimentoThumbnail(){
-            return $this->DImage;
+            return $this->DepoimentoThumbnail;
           }
-          public function setDepoimentoThumbnail($DImage){
-            $this->$DImage = $DImage;
+          public function setDepoimentoThumbnail($DepoimentoThumbnail){
+            $this->$DepoimentoThumbnail = $DepoimentoThumbnail;
           }
           public function getDepoimentoContent() {
             return $this->DContent;

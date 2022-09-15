@@ -24,6 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+
+((SELECT DepoimentosID, Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor,
+IJ1.Users_Name, IJ2.Users_Name, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description,
+ DepoimentosTranslations_Content FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK
+ INNER JOIN Users AS IJ1 ON IJ1.Users_ID = Depoimentos.Users_ID_FK_Author
+ INNER JOIN Users AS IJ2 ON IJ2.Users_ID = Depoimentos.Users_ID_FK_LastEditionAuthor WHERE DepoimentosTranslations.DepoimentosTranslations_Language = ?));
+
 -- Estrutura para tabela `ActivityLogs`
 --
 
@@ -176,11 +183,10 @@ INSERT INTO `GeneralSettings` (`GeneralSettings_ID`, `GeneralSettings_Key`, `Gen
 
 
 
-
 CREATE TABLE  `Depoimentos` (
- `DepoimentosID` int NOT NULL,
+ `DepoimentosID` int(11) NOT NULL,
  `Depoimentos_Date` date DEFAULT NULL,
- `Depoimentos_Thumbnail`varchar(512) DEFAULT NULL,
+  `Depoimentos_Thumbnail` varchar(512) DEFAULT NULL,
  `Depoimentos_LastEditonDate` date DEFAULT NULL,
  `Users_ID_FK_Author` int(11) DEFAULT NULL,
  `Users_ID_FK_LastEditionAuthor` int(11) DEFAULT NULL
@@ -195,6 +201,12 @@ CREATE TABLE `DepoimentosTranslations` (
   `DepoimentosID_FK` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+INSERT INTO `Depoimentos` (`DepoimentosID`,`Depoimentos_Date`,`Depoimentos_Thumbnail`,`Depoimentos_LastEditonDate`, `Users_ID_FK_Author`, `Users_ID_FK_LastEditionAuthor`) VALUES 
+(2,'2022-10-10','campus-tancredo-neves-da-ufsj-750x430.jpg','2022-10-10',1,1);
+
+INSERT INTO `depoimentostranslations` (`DepoimentosTranslations_ID`,`DepoimentosTranslations_Language`,`DepoimentosTranslations_Title`,`DepoimentosTranslations_Content`, `DepoimentosTranslations_Description`,`DepoimentosID_FK`)
+VALUES (2,'pt-br','teste','uga/2017','alo',2);
 --
 -- Estrutura para tabela `Highlights`
 --
@@ -947,9 +959,14 @@ ALTER TABLE `Highlights`
 ALTER TABLE `HighlightsTranslations`
   ADD CONSTRAINT `HighlightsTranslations_ibfk_1` FOREIGN KEY (`Highlights_ID_FK`) REFERENCES `Highlights` (`Highlights_ID`);
 --
+
+
 ALTER TABLE `Depoimentos`
   ADD CONSTRAINT `Depoimentos_ibfk_1` FOREIGN KEY (`Users_ID_FK_Author`) REFERENCES `Users` (`Users_ID`),
   ADD CONSTRAINT `Depoimentos_ibfk_2` FOREIGN KEY (`Users_ID_FK_LastEditionAuthor`) REFERENCES `Users` (`Users_ID`);
+  
+  
+  
 -- Restrições para tabelas `HighlightsTranslations`
 --
 ALTER TABLE `DepoimentosTranslations`
