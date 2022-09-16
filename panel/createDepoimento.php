@@ -13,8 +13,6 @@
 
     <title>ASSIN - Criar Depoimentos</title>
 
-
-
 <!-- Bootstrap core CSS-->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -91,7 +89,7 @@
             </div>
             <hr>
             <div class="form-group">
-              <label for="InputDescription">Descrição </label>
+              <label for="InputDescription">Descrição (máx 400) </label>
               <ul class="nav nav-tabs" id="Description" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="pt-BR-tab" data-toggle="tab" href="#description_portuguese" role="tab" aria-controls="portuguese" aria-selected="true">Português</a>
@@ -108,16 +106,16 @@
               </ul>
               <div class="tab-content" id="DescriptionContent">
                 <div class="tab-pane fade mt-1 show active" id="description_portuguese" role="tabpanel" aria-labelledby="pt-BR-tab">
-                  <textarea name="txtDescriptionPT-BR" class="form-control" maxlength="512"></textarea>
+                  <textarea name="txtDescriptionPT-BR" class="form-control" maxlength="200"></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="description_english" role="tabpanel" aria-labelledby="en-US-tab">
-                  <textarea name="txtDescriptionEN-US" class="form-control" maxlength="512"></textarea>
+                  <textarea name="txtDescriptionEN-US" class="form-control" maxlength="200"></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="description_spanish" role="tabpanel" aria-labelledby="es-ES-tab">
-                  <textarea name="txtDescriptionES-ES" class="form-control" maxlength="512"></textarea>
+                  <textarea name="txtDescriptionES-ES" class="form-control" maxlength="200"></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="description_french" role="tabpanel" aria-labelledby="fr-FR-tab">
-                  <textarea name="txtDescriptionFR-FR" class="form-control" maxlength="512"></textarea>
+                  <textarea name="txtDescriptionFR-FR" class="form-control" maxlength="200"></textarea>
                 </div>
               </div>
             </div>
@@ -147,13 +145,13 @@
                   <textarea id="txtContent-ptbr" name="txtContentPT-BR"></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="english" role="tabpanel" aria-labelledby="en-US-tab">
-                  <textarea id="txtContent-enus" name="txtContentEN-US"></textarea>
+                  <textarea id="txtContent-enus"maxlength="400"  name="txtContentEN-US"></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="spanish" role="tabpanel" aria-labelledby="es-ES-tab">
-                  <textarea id="txtContent-eses" name="txtContentES-ES"></textarea>
+                  <textarea id="txtContent-eses" maxlength="400" name="txtContentES-ES"></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="french" role="tabpanel" aria-labelledby="fr-FR-tab">
-                  <textarea id="txtContent-frfr" name="txtContentFR-FR"></textarea>
+                  <textarea id="txtContent-frfr" maxlength="400" name="txtContentFR-FR"></textarea>
                 </div>
               </div>
             </div>
@@ -207,11 +205,10 @@
       $(document).ready(function() {
         $('#txtContent-ptbr').richText();
         $('#txtContent-enus').richText();
-        $('#txtContent-eses').richText();
-        $('#txtContent-frfr').richText();
+        // $('#txtContent-eses').richText();
+        // $('#txtContent-frfr').richText();
         $(".topbox").prepend('<img src="../assets/images/menu-logo_menorainda.png" class="m-1 float-left" width="36px" height="36px">');
       });
     </script>
   </body>
-
 </html>

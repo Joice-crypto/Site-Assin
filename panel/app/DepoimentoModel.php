@@ -33,13 +33,16 @@
           public function setDepoimentoLastEditionDate($DepoLastEditionDate) {
             $this->DepoLastEditionDate = $DepoLastEditionDate;
           }
-          public function getDepoimentoTitle() {
-            return $this->DName;
-          }
+         public function getDepoimentoTitle(){
 
-          public function setDepoimentoTitle($DName){
-            $this->DName = $DName;
-          }
+          return $this->DName;
+
+         }
+         public function setDepoimentoTitle($DName){
+
+          $this->DName = $DName;
+
+         }
           public function getDepoimentoDescription() {
             return $this->DepoimentoDescription;
           }
@@ -64,7 +67,7 @@
             return $this->DepoimentoThumbnail;
           }
           public function setDepoimentoThumbnail($DepoimentoThumbnail){
-            $this->$DepoimentoThumbnail = $DepoimentoThumbnail;
+            $this->DepoimentoThumbnail = $DepoimentoThumbnail;
           }
           public function getDepoimentoContent() {
             return $this->DContent;

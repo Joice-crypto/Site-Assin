@@ -282,49 +282,53 @@ $( document ).ready( function () {
             },
             "txtDescriptionPT-BR": {
                 required: true,
-                maxlength: 512
+                maxlength: 200
             },
             "txtDescriptionEN-US": {
                 required: true,
-                maxlength: 512
+                maxlength: 200
             },
             "fileThumb": {
                 required: true,
                 extension: "jpg|jpeg|png"
             },
             "txtContentPT-BR": {
-                required: true
+                required: true,
+                maxlength: 400
             },
             "txtContentEN-US": {
-                required: true
+                required: true,
+                maxlength: 400
             }
         },
         messages: {
             "txtTitlePT-BR": {
                 required: "O campo título é obrigatório.",
-                maxlength: "O campo título não deve exceder 255 caracteres."
+                maxlength: "O campo título não deve exceder 200 caracteres."
             },
             "txtTitleEN-US": {
                 required: "O campo título é obrigatório.",
-                maxlength: "O campo título não deve exceder 255 caracteres."
+                maxlength: "O campo título não deve exceder 200 caracteres."
             },
             "txtDescriptionPT-BR": {
                 required: "O campo descrição é obrigatório.",
-                maxlength: "O campo descrição não deve exceder 512 caracteres."
+                maxlength: "O campo descrição não deve exceder 200 caracteres."
             },
             "txtDescriptionEN-US": {
                 required: "O campo descrição é obrigatório.",
-                maxlength: "O campo descrição não deve exceder 512 caracteres."
+                maxlength: "O campo descrição não deve exceder 200 caracteres."
             },
             "fileThumb": {
                 required: "Uma imagem precisa ser selecionada.",
                 extension: "Somente são aceitas imagens com extensão .jpg, .jpeg e .png."
             },
             "txtContentPT-BR": {
-                required: "O campo conteúdo é obrigatório."
+                required: "O campo conteúdo é obrigatório.",
+                maxlength: "O campo não deve exceder 400 caracteres."
             },
             "txtContentEN-US": {
-                required: "O campo conteúdo é obrigatório."
+                required: "O campo conteúdo é obrigatório.",
+                maxlength: "O campo não deve exceder 400 caracteres."
             }
         },
         errorElement: "em",
@@ -338,10 +342,10 @@ $( document ).ready( function () {
                 error.insertAfter( element );
             }
         },
-        depoimento: function ( element, errorClass, validClass ) {
+        highlight: function ( element, errorClass, validClass ) {
             $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
         },
-        undepoimento: function (element, errorClass, validClass) {
+        unhighlight: function (element, errorClass, validClass) {
             $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
         }
     });

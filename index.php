@@ -67,15 +67,15 @@ $GeneralSettingModel = $GeneralSettingController->getGeneralSetting("institution
       <div id="carouselExampleControls" class="carousel slide h-100" data-ride="carousel">
         <div class="carousel-inner h-100">
           <?php for ($i = 0; $i < count($CarouselImagesArray); $i++) {
-            var_dump($CarouselImagesArray[$i]->getCImageName());
+            
             if ($i == 0) { ?>
-              <!-- <div class="carousel-item active">
+               <div class="carousel-item active">
                 <img class="d-block w-100 carousel-img" src="assets/pictures/slides/<?php echo $CarouselImagesArray[$i]->getCImageName(); ?>">
               </div>
             <?php } else { ?>
               <div class="carousel-item">
                 <img class="d-block w-100 carousel-img" src="assets/pictures/slides/<?php echo $CarouselImagesArray[$i]->getCImageName(); ?>">
-              </div> -->
+              </div> 
           <?php }
           } ?>
         </div>

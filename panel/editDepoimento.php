@@ -5,11 +5,7 @@
   $DepoimentoController = new DepoimentoController();
 
   if(isset($_GET["id"]) && is_numeric($_GET["id"])) {
-
-    
-    $DepoimentoID = $_GET["id"];
-    $EditDepoimento = $DepoimentoController->getDepoimentosAllLang($DepoimentoID);
-   
+    $EditDepoimento = $DepoimentoController->getDepoimentoAllLang($_GET["id"]);
   } else {
     header("location: 404.php");
     exit();
@@ -68,9 +64,9 @@
             </li>
             <li class="breadcrumb-item active">Editar</li>
             <li class="breadcrumb-item active">Depoimentos</li>
-            <li class="breadcrumb-item active"><?php   echo isset($EditDepoimento->getDepoimentoTitle()["pt-br"]) ? count($EditDepoimento->getDepoimentoTitle()["pt-br"]) : 0; ?></li>
+            <li class="breadcrumb-item active"><?php    $EditDepoimento->getDepoimentoTitle()["pt-br"] ?></li>
           </ol>
-          <form id="editDepoimento">
+          <form id="editDepoimento" method="$_POST">
             <input type="hidden" name="actionDepoimento" value="edit">
             <input type="hidden" name="DepoimentoID" value="<?php echo $EditDepoimento->getDepoimentoID(); ?>">
             <div class="form-group">
@@ -111,7 +107,7 @@
             </div>
             <hr>
             <div class="form-group">
-              <label for="InputDescription">Descrição (Máx 512)</label>
+              <label for="InputDescription">Descrição</label>
               <ul class="nav nav-tabs" id="Description" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="pt-BR-tab" data-toggle="tab" href="#description_portuguese" role="tab" aria-controls="portuguese" aria-selected="true">Português</a>
@@ -128,10 +124,10 @@
               </ul>
               <div class="tab-content" id="DescriptionContent">
                 <div class="tab-pane fade mt-1 show active" id="description_portuguese" role="tabpanel" aria-labelledby="pt-BR-tab">
-                  <textarea name="txtDescriptionPT-BR" class="form-control" maxlength="512"><?php echo $EditDepoimento->getDepoimentoDescription()["pt-br"]; ?></textarea>
+                  <textarea name="txtDescriptionPT-BR" class="form-control" maxlength="200"><?php echo $EditDepoimento->getDepoimentoDescription()["pt-br"]; ?></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="description_english" role="tabpanel" aria-labelledby="en-US-tab">
-                  <textarea name="txtDescriptionEN-US" class="form-control" maxlength="512"><?php echo $EditDepoimento->getDepoimentoDescription()["en-us"]; ?></textarea>
+                  <textarea name="txtDescriptionEN-US" class="form-control" maxlength="200"><?php echo $EditDepoimento->getDepoimentoDescription()["en-us"]; ?></textarea>
                 </div>
                 <!-- <div class="tab-pane fade mt-1" id="description_spanish" role="tabpanel" aria-labelledby="es-ES-tab">
                   <textarea name="txtDescriptionES-ES" class="form-control" maxlength="512"><?php echo  $EditDepoimento->getDepoimentoDescription()["es-es"]; ?></textarea>
@@ -144,7 +140,7 @@
             <hr>
             <div class="form-group">
               <div class="rounded">
-                <img src="<?php echo "../assets/pictures/" . $EditDepoimento->getDepoimentoThumbnail(); ?>" width="150px" height="100px">
+                <img src="<?php echo "../assets/pictures/fotos/" . $EditDepoimento->getDepoimentoThumbnail(); ?>" width="150px" height="100px">
               </div>
               <label for="InputThumb">Thumbnail</label>
               <input type="file" name="fileThumb" class="form-control-file" id="InputThumb">
@@ -167,10 +163,10 @@
               </ul> -->
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade mt-1 show active" id="portuguese" role="tabpanel" aria-labelledby="pt-BR-tab">
-                  <textarea id="txtContent-ptbr" name="txtContentPT-BR"><?php echo  $EditDepoimento->getDepoimentoContent()["pt-br"]; ?></textarea>
+                  <textarea id="txtContent-ptbr" name="txtContentPT-BR" maxlength="400"><?php echo  $EditDepoimento->getDepoimentoContent()["pt-br"]; ?></textarea>
                 </div>
                 <div class="tab-pane fade mt-1" id="english" role="tabpanel" aria-labelledby="en-US-tab">
-                  <textarea id="txtContent-enus" name="txtContentEN-US"><?php echo  $EditDepoimento->getDepoimentoContent()["en-us"]; ?></textarea>
+                  <textarea id="txtContent-enus" name="txtContentEN-US" maxlength="400"><?php echo  $EditDepoimento->getDepoimentoContent()["en-us"]; ?></textarea>
                 </div>
                 <!-- <div class="tab-pane fade mt-1" id="spanish" role="tabpanel" aria-labelledby="es-ES-tab">
                   <textarea id="txtContent-eses" name="txtContentES-ES"><?php echo $EditDepoimento->getDepoimentoContent()["es-es"]; ?></textarea>

@@ -8,7 +8,7 @@ require_once('panel/app/GeneralSettingController.php');
 
 
 $DepoimentoController = new DepoimentoController();
-$DepoimentosArray = $DepoimentoController->getAllDepoimentos($lang["CURRENT_LANG_ISO"]);
+$DepoimentosArray = $DepoimentoController->getLastestDepoimentos($lang["CURRENT_LANG_ISO"]);
 
 ?>
 
@@ -29,13 +29,14 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos($lang["CURRENT_LANG
             if ($i == 0) { ?>
             <div class="carousel-item active">
         
-             <img style="margin-top:10px;
-                  width: 100px;
-                  height: 90px;
-                  border-radius:47%;
-                  margin-left: 40%;" src="/assets/pictures/slides/<?php var_dump($DepoimentosArray[$i]->getDepoimentoThumbnail()) ; ?>" alt="First slide">
-            <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?></h5>
-            <p style="color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
+             <img style="
+                  width: 90px;
+                  height: 70px;
+                  border-radius:45%;
+                  margin-left: 40%;" src="assets\pictures\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide">
+            <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?> </h5>
+            <p style="text-align:center"><?php echo $DepoimentosArray[$i]->getDepoimentoDescription(); ?></p>
+            <p style="color: #000; margin-top: 10px; text-align:justify; overflow-wrap: break-word;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
             </div>
             <?php } else { ?>
               <div class="carousel-item">
@@ -43,8 +44,9 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos($lang["CURRENT_LANG
                   width: 100px;
                   height: 90px;
                   border-radius:47%;
-                  margin-left: 40%;"  src="assets/pictures/slides/<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide">
+                  margin-left: 40%; "  src="assets/pictures/fotos/<?php echo $DepoimentosArray[$i]->getDepoimentoThumbnail(); ?>" alt="First slide">
                 <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?></h5>
+                <p style="text-align:center"><?php echo $DepoimentosArray[$i]->getDepoimentoDescription(); ?></p>
                 <p style="color: #000; margin-top: 10px; text-align:justify ;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
               </div>
           <?php }
@@ -53,11 +55,11 @@ $DepoimentosArray = $DepoimentoController->getAllDepoimentos($lang["CURRENT_LANG
           </div>
          
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" style="opacity: 0;"  href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+  <a class="carousel-control-next" style="opacity: 0;"  href="#carouselExampleIndicators" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
