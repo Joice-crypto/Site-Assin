@@ -28,7 +28,7 @@
                 }
             }
 
-            $SearchQuery = $pdo->prepare("SELECT Cards_ID, CardsTranslations_Name, CardsTranslations_Content FROM Cards INNER JOIN CardsTranslations ON Cards.Cards_ID = CardsTranslations.Cards_ID_FK WHERE CardsTranslations_Language = ? AND (CardsTranslations_Title LIKE ? OR CardsTranslations_Content LIKE ?);");
+            $SearchQuery = $pdo->prepare("SELECT Cards_ID, CardsTranslations_Name, CardsTranslations_Content FROM Cards INNER JOIN CardsTranslations ON Cards.Cards_ID = CardsTranslations.Cards_ID_FK WHERE CardsTranslations_Language = ? AND (CardsTranslations_Name LIKE ? OR CardsTranslations_Content LIKE ?);");
             $SearchQuery->bindValue(1, $SearchLanguage, PDO::PARAM_STR);
             $SearchQuery->bindValue(2, "%" . $SearchText . "%", PDO::PARAM_STR);
             $SearchQuery->bindValue(3, "%" . $SearchText . "%", PDO::PARAM_STR);
@@ -39,7 +39,7 @@
                         $SearchModel = new SearchModel();
 
                         $SearchModel->setSearchID($Row["Cards_ID"]);
-                        $SearchModel->setSearchTitle($Row["CardsTranslations_Title"]);
+                        $SearchModel->setSearchTitle($Row["CardsTranslations_Name"]);
                         $SearchModel->setSearchText(strip_tags($Row["CardsTranslations_Content"]));
                         $SearchModel->setSearchType("card");
 
@@ -48,7 +48,7 @@
                 }
             }
 
-            $SearchQuery = $pdo->prepare("SELECT Highlights_ID, HighlightsTranslations_Name, HighlightsTranslations_Content FROM Highlights INNER JOIN HighlightsTranslations ON Highlights.Highlights_ID = HighlightsTranslations.Highlights_ID_FK WHERE HighlightsTranslations_Language = ? AND (HighlightsTranslations_Title LIKE ? OR HighlightsTranslations_Content LIKE ?);");
+            $SearchQuery = $pdo->prepare("SELECT Highlights_ID,HighlightsTranslations_Title, HighlightsTranslations_Content FROM Highlights INNER JOIN HighlightsTranslations ON Highlights.Highlights_ID = HighlightsTranslations.Highlights_ID_FK WHERE HighlightsTranslations_Language = ? AND (HighlightsTranslations_Title LIKE ? OR HighlightsTranslations_Content LIKE ?);");
             $SearchQuery->bindValue(1, $SearchLanguage, PDO::PARAM_STR);
             $SearchQuery->bindValue(2, "%" . $SearchText . "%", PDO::PARAM_STR);
             $SearchQuery->bindValue(3, "%" . $SearchText . "%", PDO::PARAM_STR);

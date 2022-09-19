@@ -446,33 +446,30 @@ function createDepoimento() {
 
 }
 
-
-
-
-function editDepoimento(DepoID) {
+function editDepoimento() {
   if ($("#editDepoimento").valid()) {
+    $("#Alerts").empty();
+    var form_data = new FormData($('#editDepoimento')[0]);
     $.ajax({
       type: 'POST',
       url: 'app/DepoimentoController.php',
-      data: $("#editDepoimento").serialize() + "&actionDepoimento=edit" + "&DepoimentoID=" + DepoID
+      data: form_data,
+      processData: false,
+      contentType: false
     }).done(function(data) {
       console.log(data);
       var dataReturned = JSON.parse(data);
       if(dataReturned.status == 'success') {
-        $('#Alerts').prepend('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
+        $('#Alerts').append('<div class="alert alert-success" role="alert">' + dataReturned.message + '</div>');
         setTimeout(function() {
-          window.location.href="Depoimentos.php"
+          window.location.href = 'Depoimentos.php';
         }, 2000);
       } else if(dataReturned.status == 'failure') {
-        $('#Alerts').prepend('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
-        setTimeout(function() {
-          $('#Alerts div').last().remove();
-        }, 5000);
+        $('#Alerts').append('<div class="alert alert-danger" role="alert">' + dataReturned.message + '</div>');
       }
     });
   }
 }
-
 
 
 function deleteDepoimento(DepoimentoID) {

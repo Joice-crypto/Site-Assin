@@ -6,6 +6,7 @@
 
   if(isset($_GET["id"]) && is_numeric($_GET["id"])) {
     $EditHighlight = $HighlightController->getHighlightAllLang($_GET["id"]);
+    var_dump($EditHighlight);
   } else {
     header("location: 404.php");
     exit();
@@ -64,7 +65,7 @@
             </li>
             <li class="breadcrumb-item active">Editar</li>
             <li class="breadcrumb-item active">Highlights</li>
-            <li class="breadcrumb-item active"><?php echo $EditHighlight->getHighlightTitle()["pt-br"]; ?></li>
+            <li class="breadcrumb-item active"><?php  $EditHighlight->getHighlightTitle()["pt-br"]; ?></li>
           </ol>
 
           <form id="editHighlight">
