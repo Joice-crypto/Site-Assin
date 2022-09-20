@@ -85,7 +85,7 @@
                   echo json_encode(array("status" => "failure", "message" => "Não foi possível criar o Depoimento."));
                   exit();
                 }
-                } else {
+              } else {
                   echo json_encode(array("status" => "failure", "message" => "Não foi possível fazer o upload da imagem."));
                 exit();
                 }

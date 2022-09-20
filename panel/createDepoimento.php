@@ -193,6 +193,7 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <script src="js/front.js"></script>
+  
     
     <!-- Validation plugin -->
     <script src="js/jquery-validation/dist/jquery.validate.js"></script>

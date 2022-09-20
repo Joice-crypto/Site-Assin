@@ -59,7 +59,7 @@
           return $this->DepoDate;
         }
         public function setDepoDate($DepoDate){
-          $this->$DepoDate = $DepoDate;
+          $this->DepoDate = $DepoDate;
         }
         public function getDepoimentoThumbnail(){
           return $this->DepoimentoThumbnail;
