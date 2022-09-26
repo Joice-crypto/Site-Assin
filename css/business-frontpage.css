@@ -180,7 +180,7 @@ input[type="text"]:focus {
 }
 
 .card-img-top {
-  height: 40%;
+  height: 45%;
 	overflow: hidden;
 	border-radius: 3px 3px 0px 0px;
 }

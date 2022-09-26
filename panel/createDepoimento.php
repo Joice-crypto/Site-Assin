@@ -124,6 +124,7 @@
               <label for="InputThumb">Thumbnail</label>
               <input type="file" name="fileThumb" class="form-control-file" id="InputThumb">
             </div>
+          
             <hr>
             <div class="form-group">
               <ul class="nav nav-tabs" id="myTab" role="tablist">

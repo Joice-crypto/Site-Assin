@@ -28,8 +28,8 @@ $DepoimentosArray = $DepoimentoController->getLastestDepoimentos($lang["CURRENT_
           <?php for ($i = 0; $i < count($DepoimentosArray); $i++) {
             if ($i == 0) { ?>
             <div class="carousel-item active">
-        
-             <img style="
+              <a href="assets\pictures\fotos\<?php echo $DepoimentosArray[$i]->getDepoimentoFile(); ?>">
+              <img style="
                   width: 90px;
                   height: 70px;
                   border-radius:45%;
@@ -37,6 +37,7 @@ $DepoimentosArray = $DepoimentoController->getLastestDepoimentos($lang["CURRENT_
             <h5 style="text-align: center; color: #000; margin-top: 10px; font-size: 16px;"><?php echo $DepoimentosArray[$i]->getDepoimentoTitle(); ?> </h5>
             <p style="text-align:center"><?php echo $DepoimentosArray[$i]->getDepoimentoDescription(); ?></p>
             <p style="color: #000; margin-top: 10px; text-align:justify; overflow-wrap: break-word;"><?php echo $DepoimentosArray[$i]->getDepoimentoContent(); ?></p>
+            </a>
             </div>
             <?php } else { ?>
               <div class="carousel-item">

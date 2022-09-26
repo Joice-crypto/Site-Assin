@@ -61,7 +61,7 @@ $CardsArray = $CardController->getCards("pt-br");
           ?>
             <div class="col-sm-4 my-4">
               <div class="card h-100">
-                <img class="card-img-top" src="../assets/pictures/cards/<?php echo $CardsArray[$i]->getCardThumbnail(); ?>" alt="">
+                <img style="height: 45%;" class="card-img-top" src="../assets/pictures/cards/<?php echo $CardsArray[$i]->getCardThumbnail(); ?>" alt="">
                 <div class="card-body">
                   <h4 class="card-title"><?php echo $CardsArray[$i]->getCardName(); ?></h4>
                   <p class="card-text"><?php echo $CardsArray[$i]->getCardDescription(); ?></p>

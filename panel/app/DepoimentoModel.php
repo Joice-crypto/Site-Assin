@@ -10,6 +10,7 @@
       private $DepoLastEditionDate; 
       private $DepoimentoDescription;
       private $UserLastEditionAuthor;
+      private $FileDepoimento;
 
       public function getDepoimentoID() {
           return $this->DepoID;
@@ -25,6 +26,12 @@
     
         public function setUserAuthor($User) {
           $this->User = $User;
+        }
+        public function getDepoimentoFile() {
+          return $this->FileDepoimento;
+        }
+        public function setDepoimentoFile($FileDepoimento) {
+         $this->FileDepoimento = $FileDepoimento;
         }
         public function getDepoimentoLastEditionDate() {
           return $this->DepoLastEditionDate;
