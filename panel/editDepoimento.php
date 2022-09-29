@@ -88,7 +88,7 @@
               </ul>
               <div class="tab-content" id="TitleContent">
                 <div class="tab-pane fade mt-1 show active" id="title_portuguese" role="tabpanel" aria-labelledby="pt-BR-tab">
-                  <input type="text" name="txtTitlePT-BR" class="form-control" value="<?php echo isset($EditDepoimento->getDepoimentoTitle()["pt-br"]); ?>">
+                  <input type="text" name="txtTitlePT-BR" class="form-control" value="<?php echo $EditDepoimento->getDepoimentoTitle()["pt-br"]; ?>">
                 </div>
                 <div class="tab-pane fade mt-1" id="title_english" role="tabpanel" aria-labelledby="en-US-tab">
                   <input type="text" name="txtTitleEN-US" class="form-control" value="<?php echo $EditDepoimento->getDepoimentoTitle()["en-us"]; ?>">
@@ -146,6 +146,13 @@
               <label for="InputThumb">Thumbnail</label>
               <input type="file" name="fileThumb" class="form-control-file" id="InputThumb">
             </div>
+            <div class="form-group">
+              <div class="rounded">
+                <a href="<?php echo "../assets/files/" . $EditDepoimento->getDepoimentoFile(); ?>" ></a>
+              </div>
+              <label for="InputThumb">Arquivo do Depoimento</label>
+              <input type="file" name="fileThumb" class="form-control-file" id="InputThumb">
+            </div>
             <hr>
             <div class="form-group">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -155,12 +162,12 @@
                 <li class="nav-item">
                   <a class="nav-link" id="en-US-tab" data-toggle="tab" href="#english" role="tab" aria-controls="english" aria-selected="false">Inglês</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" id="es-ES-tab" data-toggle="tab" href="#spanish" role="tab" aria-controls="spanish" aria-selected="false">Espanhol</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="fr-FR-tab" data-toggle="tab" href="#french" role="tab" aria-controls="french" aria-selected="false">Francês</a>
-                </li>
+                </li> -->
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade mt-1 show active" id="portuguese" role="tabpanel" aria-labelledby="pt-BR-tab">

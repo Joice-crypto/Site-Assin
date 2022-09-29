@@ -33,22 +33,23 @@
       if (isset($_SESSION["UserID"]) && is_numeric($_SESSION["UserID"]) && !empty($_SESSION["UserID"]) && 
           isset($_POST["txtTitlePT-BR"]) && isset($_POST["txtDescriptionPT-BR"]) && isset($_POST["txtContentPT-BR"]) && 
           isset($_POST["txtTitleEN-US"]) && isset($_POST["txtDescriptionEN-US"]) && isset($_POST["txtContentEN-US"]) && 
-          
           isset($_FILES["fileThumb"]) && strlen($_FILES["fileThumb"]["name"]) <= MAX_FILE_NAME_SIZE &&
+          isset($_FILES["fileArq"]) && strlen($_FILES["fileArq"]["name"]) <= MAX_FILE_NAME_SIZE &&
           strlen($_POST["txtTitlePT-BR"]) <= MAX_TITLE_SIZE && strlen($_POST["txtTitleEN-US"]) <= MAX_FILE_NAME_SIZE &&
           strlen($_POST["txtDescriptionPT-BR"]) <= MAX_DESCRIPTION_SIZE && strlen($_POST["txtDescriptionEN-US"]) <= MAX_DESCRIPTION_SIZE) {
           
            
 
           if ($_FILES["fileThumb"]["size"] != 0) {
-            if (!checkExistence("../../assets/pictures/fotos/", $_FILES["fileThumb"]["name"])) {
-              if (uploadImage($_FILES["fileThumb"], "../../assets/pictures/fotos/")) {
+            if (!checkExistence("../../assets/pictures/fotos/", $_FILES["fileThumb"]["name"]) && !checkExistence("../../assets/files/", $_FILES["fileArq"]["name"])) {
+              if (uploadImage($_FILES["fileThumb"], "../../assets/pictures/fotos/") && uploadFile($_FILES["fileArq"], "../../assets/files/")) {
                 $DepoimentoModel = new DepoimentoModel();
                 $UserModel = new UserModel();
                 $DepoimentoController = new DepoimentoController();
                 $DepoimentoModel->setDepoDate(date("Y-m-d"));
                 $DepoimentoModel->setDepoimentoLastEditionDate(date("Y-m-d"));
                 $DepoimentoModel->setDepoimentoThumbnail($_FILES["fileThumb"]["name"]);
+                $DepoimentoModel->setDepoimentoFile($_FILES["fileArq"]["name"]);
                 $UserModel->setUserID($_SESSION["UserID"]);
                 $DepoimentoModel->setUserAuthor($UserModel);
                 $DepoimentoModel->setUserLastEditionAuthor($UserModel);
@@ -82,6 +83,7 @@
                   exit();
                 } else {
                   deleteFile("../../assets/pictures/" . $_FILES["fileThumb"]["name"]);
+                  deleteFile("../../assets/files/" . $_FILES["fileArq"]["name"]);
                   echo json_encode(array("status" => "failure", "message" => "Não foi possível criar o Depoimento."));
                   exit();
                 }
@@ -147,9 +149,10 @@
         $NewImage = false;
   
         if($_FILES["fileThumb"]["size"] != 0) {
-          if(!checkExistence("../../assets/pictures/fotos/", $_FILES["fileThumb"]["name"])) {
-            if(uploadImage($_FILES["fileThumb"], "../../assets/pictures/fotos/")) {
+          if(!checkExistence("../../assets/pictures/fotos/", $_FILES["fileThumb"]["name"]) || !checkExistence("../../assets/files/", $_FILES["fileArq"]["name"])) {
+            if(uploadImage($_FILES["fileThumb"], "../../assets/pictures/fotos/") || uploadFile($_FILES["fileArq"], "../../assets/files/")) {
               $DepoimentoModel->setDepoimentoThumbnail($_FILES["fileThumb"]["name"]);
+              $DepoimentoModel->setDepoimentoFile($_FILES["fileArq"]["name"]);
               $NewImage = true;
             } else {
               echo json_encode(array("status" => "failure", "message" => "Não foi possível fazer o upload da imagem."));
@@ -179,7 +182,7 @@
     public function getLastestDepoimentos($DepoimentoLanguage) {
       global $pdo;
 
-      $DepoimentosQuery = $pdo->prepare("SELECT DepoimentosID, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content, Depoimentos_Date, Depoimentos_Thumbnail FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosTranslations_Language = ? ORDER BY DepoimentosID DESC LIMIT 3;");
+      $DepoimentosQuery = $pdo->prepare("SELECT DepoimentosID, DepoimentosTranslations_Language, DepoimentosTranslations_Title, Depoimentos_Arquivo, DepoimentosTranslations_Description, DepoimentosTranslations_Content, Depoimentos_Date, Depoimentos_Thumbnail FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosTranslations_Language = ? ORDER BY DepoimentosID DESC LIMIT 3;");
       $DepoimentosQuery->bindValue(1, $DepoimentoLanguage, PDO::PARAM_STR);
 
       $arr_Depoimentos = array();
@@ -190,6 +193,7 @@
           $Depoimento->setDepoimentoID($Row["DepoimentosID"]);
           $Depoimento->setDepoimentoLanguage($Row["DepoimentosTranslations_Language"]);
           $Depoimento->setDepoimentoTitle($Row["DepoimentosTranslations_Title"]);
+          $Depoimento->setDepoimentoFile($Row["Depoimentos_Arquivo"]);
           $Depoimento->setDepoimentoDescription($Row["DepoimentosTranslations_Description"]);
           $Depoimento->setDepoimentoContent($Row["DepoimentosTranslations_Content"]);
           $Depoimento->setDepoDate($Row["Depoimentos_Date"]);
@@ -205,7 +209,7 @@
     public function getDepoimento($DepoimentoID, $DepoimentoLanguage) {
       global $pdo;
 
-      $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content, Depoimentos_Date, Depoimentos_Thumbnail FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosID = ? AND DepoimentosTranslations_Language = ? LIMIT 1;");
+      $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, DepoimentosTranslations_Language, DepoimentosTranslations_Title,Depoimentos_Arquivo, DepoimentosTranslations_Description, DepoimentosTranslations_Content, Depoimentos_Date, Depoimentos_Thumbnail FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosID = ? AND DepoimentosTranslations_Language = ? LIMIT 1;");
       $DepoimentoQuery->bindValue(1, $DepoimentoID, PDO::PARAM_INT);
       $DepoimentoQuery->bindValue(2, $DepoimentoLanguage, PDO::PARAM_STR);
 
@@ -223,6 +227,7 @@
         $DepoimentoModel->setDepoimentoContent($Row["DepoimentosTranslations_Content"]);
         $DepoimentoModel->setDepoDate($Row["Depoimentos_Date"]);
         $DepoimentoModel->setDepoimentoThumbnail($Row["Depoimentos_Thumbnail"]);
+        $DepoimentoModel->setDepoimentoFile($Row["Depoimentos_Arquivo"]);
       }
 
       return $DepoimentoModel;
@@ -231,7 +236,7 @@
     public function getDepoimentoAllLang($DepoimentoID) {
       global $pdo;
 
-      $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail FROM Depoimentos WHERE DepoimentosID = ?;");
+      $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail,Depoimentos_Arquivo FROM Depoimentos WHERE DepoimentosID = ?;");
       $DepoimentoQuery->bindValue(1, $DepoimentoID, PDO::PARAM_INT);
 
       $DepoimentoModel = null;
@@ -245,6 +250,7 @@
           $DepoimentoModel->setDepoDate($Row["Depoimentos_Date"]);
           $DepoimentoModel->setDepoimentoLastEditionDate($Row["Depoimentos_LastEditonDate"]);
           $DepoimentoModel->setDepoimentoThumbnail($Row["Depoimentos_Thumbnail"]);
+          $DepoimentoModel->setDepoimentoFile($Row["Depoimentos_Arquivo"]);
 
           $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosTranslations_ID, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content FROM DepoimentosTranslations WHERE DepoimentosID_FK = ?;");
           $DepoimentoQuery->bindValue(1, $DepoimentoID, PDO::PARAM_INT);
@@ -275,7 +281,7 @@
     public function getDepoimentos($DepoimentoLanguage) {
       global $pdo;
 
-      $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor, IJ1.Users_Name, IJ2.Users_Name, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK INNER JOIN Users AS IJ1 ON IJ1.Users_ID = Depoimentos.Users_ID_FK_Author INNER JOIN Users AS IJ2 ON IJ2.Users_ID = Depoimentos.Users_ID_FK_LastEditionAuthor WHERE DepoimentosTranslations.DepoimentosTranslations_Language = ?;");
+      $DepoimentoQuery = $pdo->prepare("SELECT DepoimentosID, Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail,Depoimentos_Arquivo, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor, IJ1.Users_Name, IJ2.Users_Name, DepoimentosTranslations_Language, DepoimentosTranslations_Title, DepoimentosTranslations_Description, DepoimentosTranslations_Content FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK INNER JOIN Users AS IJ1 ON IJ1.Users_ID = Depoimentos.Users_ID_FK_Author INNER JOIN Users AS IJ2 ON IJ2.Users_ID = Depoimentos.Users_ID_FK_LastEditionAuthor WHERE DepoimentosTranslations.DepoimentosTranslations_Language = ?;");
       $DepoimentoQuery->bindValue(1, $DepoimentoLanguage, PDO::PARAM_STR);       
 
       $DepoimentosArray = array();
@@ -297,6 +303,7 @@
         $DepoimentoModel->setDepoDate($Row["Depoimentos_Date"]);
         $DepoimentoModel->setDepoimentoLastEditionDate($Row["Depoimentos_LastEditonDate"]);
         $DepoimentoModel->setDepoimentoThumbnail($Row["Depoimentos_Thumbnail"]);
+        $DepoimentoModel->setDepoimentoFile($Row["Depoimentos_Arquivo"]);
         $DepoimentoModel->setDepoimentoLanguage($Row["DepoimentosTranslations_Language"]);
         $DepoimentoModel->setDepoimentoTitle($Row["DepoimentosTranslations_Title"]);
         $DepoimentoModel->setDepoimentoDescription($Row["DepoimentosTranslations_Description"]);
@@ -323,6 +330,7 @@
         $DepoimentoQuery->bindValue(1, $DepoimentoID, PDO::PARAM_INT);
 
         deleteFile("../../assets/pictures/fotos/" . $DepoimentoThumbnail->getDepoimentoAllLang($DepoimentoID)->getDepoimentoThumbnail());
+        deleteFile("../../assets/files/" . $DepoimentoThumbnail->getDepoimentoAllLang($DepoimentoID)->getDepoimentoFile());
 
         if ($DepoimentoQuery->execute()) {
           return true;
@@ -336,12 +344,13 @@
     public function createDepoimento($DepoimentoModel) {
       global $pdo;
 
-      $DepoimentoQuery = $pdo->prepare("INSERT INTO Depoimentos(Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor) VALUES (?, ?, ?, ?, ?);");
+      $DepoimentoQuery = $pdo->prepare("INSERT INTO Depoimentos(Depoimentos_Date, Depoimentos_LastEditonDate, Depoimentos_Thumbnail,Depoimentos_Arquivo, Users_ID_FK_Author, Users_ID_FK_LastEditionAuthor) VALUES (?, ?, ?, ?,?, ?);");
       $DepoimentoQuery->bindValue(1, $DepoimentoModel->getDepoDate(), PDO::PARAM_STR);
       $DepoimentoQuery->bindValue(2, $DepoimentoModel->getDepoimentoLastEditionDate(), PDO::PARAM_STR);
       $DepoimentoQuery->bindValue(3, $DepoimentoModel->getDepoimentoThumbnail(), PDO::PARAM_STR);
-      $DepoimentoQuery->bindValue(4, $DepoimentoModel->getUserAuthor()->getUserID(), PDO::PARAM_INT);
-      $DepoimentoQuery->bindValue(5, $DepoimentoModel->getUserLastEditionAuthor()->getUserID(), PDO::PARAM_INT);
+      $DepoimentoQuery->bindValue(4, $DepoimentoModel->getDepoimentoFile(), PDO::PARAM_STR);
+      $DepoimentoQuery->bindValue(5, $DepoimentoModel->getUserAuthor()->getUserID(), PDO::PARAM_INT);
+      $DepoimentoQuery->bindValue(6, $DepoimentoModel->getUserLastEditionAuthor()->getUserID(), PDO::PARAM_INT);
 
       if ($DepoimentoQuery->execute()) {
         $DepoimentoLanguages = array("pt-br", "en-us");
@@ -371,11 +380,12 @@
       global $pdo;
 
       if($NewImage) {
-        $DepoimentoQuery = $pdo->prepare("UPDATE Depoimentos SET Depoimentos_LastEditonDate = ?, Depoimentos_Thumbnail = ?, Users_ID_FK_LastEditionAuthor = ? WHERE DepoimentosID = ?;");
+        $DepoimentoQuery = $pdo->prepare("UPDATE Depoimentos SET Depoimentos_LastEditonDate = ?, Depoimentos_Thumbnail = ?,Depoimentos_Arquivo = ?, Users_ID_FK_LastEditionAuthor = ? WHERE DepoimentosID = ?;");
         $DepoimentoQuery->bindValue(1, $DepoimentoModel->getDepoimentoLastEditionDate(), PDO::PARAM_STR);
         $DepoimentoQuery->bindValue(2, $DepoimentoModel->getDepoimentoThumbnail(), PDO::PARAM_STR);
-        $DepoimentoQuery->bindValue(3, $DepoimentoModel->getUserLastEditionAuthor()->getUserID(), PDO::PARAM_INT);
-        $DepoimentoQuery->bindValue(4, $DepoimentoModel->getDepoimentoID(), PDO::PARAM_INT);
+        $DepoimentoQuery->bindValue(3, $DepoimentoModel->getDepoimentoFile(), PDO::PARAM_STR);
+        $DepoimentoQuery->bindValue(4, $DepoimentoModel->getUserLastEditionAuthor()->getUserID(), PDO::PARAM_INT);
+        $DepoimentoQuery->bindValue(5, $DepoimentoModel->getDepoimentoID(), PDO::PARAM_INT);
       } else {
         $DepoimentoQuery = $pdo->prepare("UPDATE Depoimentos SET Depoimentos_LastEditonDate = ?, Users_ID_FK_LastEditionAuthor = ? WHERE DepoimentosID = ?;");
         $DepoimentoQuery->bindValue(1, $DepoimentoModel->getDepoimentoLastEditionDate(), PDO::PARAM_STR);

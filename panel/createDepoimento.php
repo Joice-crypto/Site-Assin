@@ -124,6 +124,10 @@
               <label for="InputThumb">Thumbnail</label>
               <input type="file" name="fileThumb" class="form-control-file" id="InputThumb">
             </div>
+            <div class="form-group">
+              <label for="InputThumb">Arquivo do Depoimento</label>
+              <input type="file" name="fileArq" class="form-control-file" id="InputThumb">
+            </div>
           
             <hr>
             <div class="form-group">
