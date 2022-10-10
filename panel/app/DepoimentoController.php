@@ -182,7 +182,7 @@
     public function getLastestDepoimentos($DepoimentoLanguage) {
       global $pdo;
 
-      $DepoimentosQuery = $pdo->prepare("SELECT DepoimentosID, DepoimentosTranslations_Language, DepoimentosTranslations_Title, Depoimentos_Arquivo, DepoimentosTranslations_Description, DepoimentosTranslations_Content, Depoimentos_Date, Depoimentos_Thumbnail FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosTranslations_Language = ? ORDER BY DepoimentosID DESC LIMIT 3;");
+      $DepoimentosQuery = $pdo->prepare("SELECT DepoimentosID, DepoimentosTranslations_Language, DepoimentosTranslations_Title, Depoimentos_Arquivo, DepoimentosTranslations_Description, DepoimentosTranslations_Content, Depoimentos_Date, Depoimentos_Thumbnail FROM Depoimentos INNER JOIN DepoimentosTranslations ON Depoimentos.DepoimentosID = DepoimentosTranslations.DepoimentosID_FK WHERE DepoimentosTranslations_Language = ? ORDER BY DepoimentosID DESC ;");
       $DepoimentosQuery->bindValue(1, $DepoimentoLanguage, PDO::PARAM_STR);
 
       $arr_Depoimentos = array();
